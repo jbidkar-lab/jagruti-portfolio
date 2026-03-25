@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hobbies — Jagruti Bidkar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink:       #1a1a18;
+    --paper:     #f5f2ec;
+    --sand:      #e8e2d6;
+    --gold:      #b8924a;
+    --gold-lt:   #d4aa6a;
+    --muted:     #7a756c;
+    --white:     #ffffff;
+    --serif:     'Cormorant Garamond', Georgia, serif;
+    --sans:      'DM Sans', sans-serif;
+    --max:       1200px;
+    --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s;
+  }
+  .cursor.hover { width: 40px; height: 40px; background: transparent; border: 1.5px solid var(--gold); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: transparent;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
+    letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.3s var(--ease);
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  section { padding: 7rem 4rem; }
+  .container { max-width: var(--max); margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.15; margin-bottom: 3.5rem;
+    max-width: 600px;
+  }
+  .section-title em { font-style: italic; }
+  .divider {
+    width: 48px; height: 1.5px; background: var(--gold);
+    margin: 1.5rem 0 3.5rem;
+  }
+
+  #hobbies { background: var(--paper); padding-top: 12rem; }
+  .hobbies-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .hobbies-quote {
+    font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300; line-height: 1.4; font-style: italic; color: var(--ink);
+  }
+  .hobbies-quote span { color: var(--gold); }
+  .hobbies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--sand); }
+  .hobby-card {
+    background: var(--paper); padding: 2rem;
+    display: flex; flex-direction: column; gap: 0.8rem;
+    transition: background 0.3s;
+  }
+  .hobby-card:hover { background: var(--white); }
+  .hobby-icon { font-size: 2rem; }
+  .hobby-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; }
+  .hobby-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  #contact { background: var(--ink); color: var(--paper); text-align: center; }
+  #contact .section-label { color: var(--gold-lt); }
+  .contact-title {
+    font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 300; line-height: 1.1; margin-bottom: 2rem;
+  }
+  .contact-title em { font-style: italic; color: var(--gold); }
+  .contact-sub { font-size: 1rem; color: rgba(245,242,236,0.5); margin-bottom: 3.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .contact-link {
+    padding: 0.9rem 2.5rem; border: 1px solid rgba(255,255,255,0.2);
+    color: var(--paper); text-decoration: none; font-size: 0.78rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+  }
+  .contact-link:hover { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+
+  footer {
+    background: #111110; padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name { font-family: var(--serif); font-size: 0.9rem; color: rgba(255,255,255,0.25); }
+  .footer-langs { font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    section { padding: 5rem 2rem; }
+    nav { padding: 1.2rem 2rem; }
+    .hobbies-layout { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .hobbies-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Jagruti Bidkar</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="activities.html">Activities</a></li>
+    <li><a href="hobbies.html">Hobbies</a></li>
+    <li><a href="work-exp.html">Work Exp.</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hobbies">
+  <div class="container">
+    <div class="hobbies-layout">
+      <div class="reveal">
+        <span class="section-label">Get to Know Me</span>
+        <h2 class="section-title">Beyond the <em>spreadsheets</em></h2>
+        <div class="divider"></div>
+        <p class="hobbies-quote">
+          "I believe the best consultants are<br/>
+          <span>curious people first</span> —<br/>
+          and professionals second."
+        </p>
+      </div>
+      <div class="hobbies-grid reveal">
+        <div class="hobby-card">
+          <div class="hobby-icon">✈️</div>
+          <div class="hobby-name">Travelling</div>
+          <div class="hobby-desc">Exploring cultures across Europe and Asia — every trip sharpens cross-cultural communication.</div>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">📚</div>
+          <div class="hobby-name">Reading</div>
+          <div class="hobby-desc">Strategy, biographies, and the occasional thriller. Always have a book on the go.</div>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">🎨</div>
+          <div class="hobby-name">Sketching & Painting</div>
+          <div class="hobby-desc">Visual thinking that feeds directly into how I approach slide design and data storytelling.</div>
+        </div>
+        <div class="hobby-card">
+          <div class="hobby-icon">⚽</div>
+          <div class="hobby-name">Sports</div>
+          <div class="hobby-desc">Team sports instilled the discipline and collaborative mindset I bring to every project.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <span class="section-label">Contact</span>
+    <h2 class="contact-title">Let's connect <em>personally</em></h2>
+    <p class="contact-sub">Share your interests or let's grab a coffee and chat!</p>
+    <div class="contact-links">
+      <a href="mailto:jbidkar@gmail.com" class="contact-link">Email me</a>
+      <a href="https://linkedin.com" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="#" class="contact-link">Download CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Jagruti Bidkar © 2025</span>
+  <span class="footer-langs">DE · EN · HI · MR</span>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .hobby-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
