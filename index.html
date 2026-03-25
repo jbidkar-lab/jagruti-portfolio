@@ -3,854 +3,793 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Jagruti Bidkar — Consultant</title>
+<title>Jagruti Bidkar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  /* ── RESET & BASE ─────────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink:       #1a1a18;
-    --paper:     #f5f2ec;
-    --sand:      #e8e2d6;
-    --gold:      #b8924a;
-    --gold-lt:   #d4aa6a;
-    --muted:     #7a756c;
-    --white:     #ffffff;
-    --serif:     'Cormorant Garamond', Georgia, serif;
-    --sans:      'DM Sans', sans-serif;
-    --max:       1200px;
-    --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  html { scroll-behavior: smooth; font-size: 16px; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.7;
-    cursor: none;
-  }
+/* ── RESET ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink:     #1a1a18;
+  --paper:   #f5f2ec;
+  --sand:    #e8e2d6;
+  --gold:    #b8924a;
+  --gold-lt: #d4aa6a;
+  --muted:   #7a756c;
+  --white:   #ffffff;
+  --teal:    #0d3b3e;
+  --teal-lt: #1a5258;
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'DM Sans', sans-serif;
+  --max:     1100px;
+  --ease:    cubic-bezier(0.25,0.46,0.45,0.94);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
 
-  /* ── CUSTOM CURSOR ────────────────────────────────────────── */
-  .cursor {
-    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s;
-  }
-  .cursor.hover { width: 40px; height: 40px; background: transparent; border: 1.5px solid var(--gold); }
+/* ── HEADER / NAV ──────────────────────── */
+header {
+  background: var(--teal);
+  padding: 0 3rem;
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+}
+.header-top {
+  padding: 1.2rem 0 0.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.header-title {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 400;
+  color: var(--white); letter-spacing: 0.02em;
+  text-decoration: none; display: inline-block;
+  cursor: pointer;
+}
+.header-title span { color: var(--gold); }
+nav { display: flex; align-items: center; padding: 0; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links li a {
+  display: block; padding: 0.85rem 1.6rem;
+  font-size: 0.82rem; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.75); text-decoration: none;
+  position: relative; transition: color 0.2s; cursor: pointer;
+}
+.nav-links li a::after {
+  content: ''; position: absolute; bottom: 0; left: 1.6rem; right: 1.6rem;
+  height: 2.5px; background: var(--gold);
+  transform: scaleX(0); transition: transform 0.25s var(--ease);
+}
+.nav-links li a:hover,
+.nav-links li a.active { color: var(--white); }
+.nav-links li a.active::after,
+.nav-links li a:hover::after { transform: scaleX(1); }
 
-  /* ── NAV ──────────────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    background: transparent;
-    transition: background 0.4s, backdrop-filter 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(245,242,236,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--sand);
-  }
-  .nav-logo {
-    font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
-    letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none; position: relative;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -3px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.3s var(--ease);
-  }
-  .nav-links a:hover::after { width: 100%; }
+/* ── PAGES ─────────────────────────────── */
+.page { display: none; min-height: calc(100vh - 90px); }
+.page.active { display: block; animation: pageFade 0.35s var(--ease); }
+@keyframes pageFade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
 
-  /* ── HERO ─────────────────────────────────────────────────── */
-  #hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
-    padding: 8rem 4rem 4rem;
-    max-width: var(--max); margin: 0 auto;
-    position: relative;
-  }
-  .hero-text { padding-right: 4rem; }
-  .hero-eyebrow {
-    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.2s var(--ease) forwards;
-  }
-  .hero-name {
-    font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 5.5rem);
-    font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.35s var(--ease) forwards;
-  }
-  .hero-name em { font-style: italic; color: var(--gold); }
-  .hero-tagline {
-    font-size: 1rem; color: var(--muted); max-width: 420px;
-    margin-bottom: 3rem; line-height: 1.8;
-    opacity: 0; animation: fadeUp 0.8s 0.5s var(--ease) forwards;
-  }
-  .hero-ctas {
-    display: flex; gap: 1.5rem; align-items: center;
-    opacity: 0; animation: fadeUp 0.8s 0.65s var(--ease) forwards;
-  }
-  .btn-primary {
-    padding: 0.85rem 2.2rem; background: var(--ink); color: var(--paper);
-    font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.1em;
-    text-transform: uppercase; text-decoration: none;
-    transition: background 0.3s, transform 0.3s;
-  }
-  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
-  .btn-ghost {
-    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink);
-    padding-bottom: 2px; transition: color 0.3s, border-color 0.3s;
-  }
-  .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+/* ── SHARED UTILS ──────────────────────── */
+.container { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
+.section-banner {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-lt) 100%);
+  text-align: center; padding: 1.2rem 2rem; margin: 2.5rem 0 0;
+}
+.section-banner h2 {
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+  color: var(--white); letter-spacing: 0.04em;
+}
+.section-banner h2::after {
+  content: ''; display: block; width: 50px; height: 2px;
+  background: var(--gold); margin: 0.5rem auto 0;
+}
+.divider { width: 48px; height: 2px; background: var(--gold); margin: 1rem 0 1.5rem; }
 
-  .hero-visual {
-    position: relative; display: flex; justify-content: center; align-items: center;
-    opacity: 0; animation: fadeIn 1s 0.5s var(--ease) forwards;
-  }
-  .hero-photo-frame {
-    width: 340px; height: 420px; position: relative;
-  }
-  .hero-photo-frame::before {
-    content: ''; position: absolute; top: -16px; right: -16px;
-    width: 100%; height: 100%; border: 1.5px solid var(--gold); z-index: 0;
-  }
-  .hero-photo-placeholder {
-    width: 100%; height: 100%; background: var(--sand);
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.05em;
-  }
-  .hero-photo-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
-  .hero-stats {
-    position: absolute; bottom: -2rem; left: -3rem;
-    display: flex; gap: 0; background: var(--white);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
-  }
-  .stat {
-    padding: 1.2rem 1.8rem; border-right: 1px solid var(--sand);
-    text-align: center;
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: var(--serif); font-size: 2rem; font-weight: 300;
-    color: var(--gold); display: block; line-height: 1;
-  }
-  .stat-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+/* ════════════════════════════════════════
+   PAGE: HOME
+════════════════════════════════════════ */
+#home { background: var(--white); }
 
-  /* ── SECTION SHARED ───────────────────────────────────────── */
-  section { padding: 7rem 4rem; }
-  .container { max-width: var(--max); margin: 0 auto; }
-  .section-label {
-    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1rem; display: block;
-  }
-  .section-title {
-    font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.2rem);
-    font-weight: 300; line-height: 1.15; margin-bottom: 3.5rem;
-    max-width: 600px;
-  }
-  .section-title em { font-style: italic; }
-  .divider {
-    width: 48px; height: 1.5px; background: var(--gold);
-    margin: 1.5rem 0 3.5rem;
-  }
+.home-intro {
+  display: grid; grid-template-columns: 1fr 280px;
+  gap: 4rem; align-items: start;
+  padding: 3.5rem 3rem 2.5rem;
+  max-width: var(--max); margin: 0 auto;
+}
+.home-intro-text p {
+  font-size: 0.93rem; color: #444; line-height: 1.95; margin-bottom: 1.2rem;
+}
+.home-intro-text p strong { color: var(--ink); font-weight: 500; }
+.home-photo {
+  width: 100%; aspect-ratio: 3/4; background: var(--sand);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0.5rem; color: var(--muted);
+  border: 1px solid var(--sand); overflow: hidden; position: relative;
+}
+.home-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; inset: 0;
+}
+.photo-placeholder {
+  text-align: center; font-size: 0.75rem; letter-spacing: 0.04em;
+  padding: 1rem; line-height: 1.6;
+}
 
-  /* ── ABOUT ────────────────────────────────────────────────── */
-  #about { background: var(--white); }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
-  }
-  .about-text p {
-    font-size: 1.05rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.9;
-  }
-  .about-text p strong { color: var(--ink); font-weight: 500; }
-  .about-highlights { display: flex; flex-direction: column; gap: 1.5rem; }
-  .highlight-item {
-    display: flex; gap: 1.5rem; align-items: flex-start;
-    padding: 1.5rem; border: 1px solid var(--sand);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .highlight-item:hover { border-color: var(--gold); transform: translateX(6px); }
-  .highlight-icon {
-    width: 40px; height: 40px; flex-shrink: 0;
-    border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-family: var(--serif); font-size: 1rem;
-  }
-  .highlight-content h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
-  .highlight-content p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+.motivation-block {
+  display: grid; grid-template-columns: 250px 1fr;
+  max-width: var(--max); margin: 0 auto; padding: 0 3rem 2rem;
+}
+.motivation-keys {
+  background: var(--teal); padding: 2.2rem 1.8rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.motivation-key {
+  display: flex; align-items: center; gap: 1rem; color: var(--white);
+}
+.motivation-key-icon {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+}
+.motivation-key-text { font-size: 0.8rem; line-height: 1.4; }
+.motivation-text {
+  background: var(--paper); padding: 2.2rem 2.2rem;
+  border: 1px solid var(--sand); border-left: none;
+}
+.motivation-text p { font-size: 0.88rem; color: #555; line-height: 1.9; }
+.motivation-text p + p { margin-top: 1rem; }
 
-  /* ── EXPERIENCE ───────────────────────────────────────────── */
-  #experience { background: var(--paper); }
-  .exp-list { display: flex; flex-direction: column; gap: 0; }
-  .exp-item {
-    display: grid; grid-template-columns: 200px 1fr;
-    gap: 3rem; padding: 2.5rem 0;
-    border-bottom: 1px solid var(--sand);
-    position: relative;
-    transition: padding-left 0.3s var(--ease);
-  }
-  .exp-item::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 0; background: var(--gold); opacity: 0.08;
-    transition: width 0.3s var(--ease);
-  }
-  .exp-item:hover { padding-left: 1rem; }
-  .exp-item:hover::before { width: 4px; }
-  .exp-meta { padding-top: 0.3rem; }
-  .exp-date {
-    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold); display: block; margin-bottom: 0.5rem;
-  }
-  .exp-company { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-  .exp-role {
-    font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
-    margin-bottom: 0.8rem; line-height: 1.3;
-  }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .exp-bullets li {
-    font-size: 0.88rem; color: var(--muted); padding-left: 1.2rem;
-    position: relative; line-height: 1.7;
-  }
-  .exp-bullets li::before {
-    content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem;
-  }
-  .exp-tag {
-    display: inline-block; margin-top: 1rem;
-    padding: 0.3rem 0.8rem; border: 1px solid var(--sand);
-    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted);
-  }
+.home-skills-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  max-width: var(--max); margin: 0 auto; padding: 0 3rem 0;
+}
+.home-skill-card {
+  background: var(--white); padding: 1.8rem 1.4rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+  text-align: center; border-right: 1px solid var(--sand);
+  border-bottom: 1px solid var(--sand);
+  transition: background 0.2s;
+}
+.home-skill-card:last-child { border-right: none; }
+.home-skill-card:hover { background: #fdfaf6; }
+.home-skill-icon { font-size: 1.8rem; }
+.home-skill-name { font-size: 0.8rem; font-weight: 500; color: var(--ink); }
+.home-skill-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
 
-  /* ── SKILLS ───────────────────────────────────────────────── */
-  #skills { background: var(--ink); color: var(--paper); }
-  #skills .section-title { color: var(--paper); }
-  #skills .section-label { color: var(--gold-lt); }
-  .skills-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px;
-    background: rgba(255,255,255,0.06);
-    margin-top: 1rem;
-  }
-  .skill-card {
-    background: var(--ink); padding: 2rem 1.8rem;
-    transition: background 0.3s;
-  }
-  .skill-card:hover { background: #242420; }
-  .skill-cat {
-    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-  }
-  .skill-items { display: flex; flex-direction: column; gap: 0.8rem; }
-  .skill-row { display: flex; flex-direction: column; gap: 0.3rem; }
-  .skill-name { font-size: 0.85rem; font-weight: 400; color: var(--paper); }
-  .skill-bar {
-    height: 2px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden;
-  }
-  .skill-bar-fill {
-    position: absolute; top: 0; left: 0; height: 100%;
-    background: var(--gold); width: 0;
-    transition: width 1.2s var(--ease);
-  }
-  .skill-bar-fill.animated { width: var(--w); }
-  .skill-level { font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
+.home-logos-strip {
+  display: flex; align-items: center; justify-content: center;
+  gap: 4rem; flex-wrap: wrap;
+  padding: 2.5rem 3rem;
+  max-width: var(--max); margin: 0 auto;
+}
 
-  /* ── PROJECTS ─────────────────────────────────────────────── */
-  #projects { background: var(--white); }
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
-    background: var(--sand);
-  }
-  .project-card {
-    background: var(--white); padding: 2.5rem;
-    display: flex; flex-direction: column;
-    transition: background 0.3s, transform 0.3s;
-    position: relative; overflow: hidden;
-  }
-  .project-card::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 2px; background: var(--gold);
-    transition: width 0.4s var(--ease);
-  }
-  .project-card:hover { background: #fdfaf6; transform: translateY(-4px); }
-  .project-card:hover::after { width: 100%; }
-  .project-type {
-    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.8rem;
-  }
-  .project-name {
-    font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
-    line-height: 1.25; margin-bottom: 1rem; flex: 1;
-  }
-  .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .project-tag {
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.25rem 0.7rem; border: 1px solid var(--sand); color: var(--muted);
-  }
-  .project-wip {
-    position: absolute; top: 1.2rem; right: 1.2rem;
-    font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.25rem 0.6rem; background: var(--sand); color: var(--muted);
-  }
+.home-ctas {
+  display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+  padding: 2.5rem 3rem 3rem; max-width: var(--max); margin: 0 auto;
+}
+.cta-card {
+  flex: 1; min-width: 190px; max-width: 240px;
+  padding: 2rem 1.5rem; border: 1px solid var(--sand);
+  text-align: center; cursor: pointer;
+  background: var(--white);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.cta-card:hover {
+  border-color: var(--gold); transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+}
+.cta-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+.cta-label {
+  display: inline-block; padding: 0.3rem 1.1rem;
+  background: var(--gold); color: var(--white);
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 0.8rem;
+}
+.cta-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.6; }
 
-  /* ── HOBBIES ──────────────────────────────────────────────── */
-  #hobbies { background: var(--paper); }
-  .hobbies-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-  .hobbies-quote {
-    font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-weight: 300; line-height: 1.4; font-style: italic; color: var(--ink);
-  }
-  .hobbies-quote span { color: var(--gold); }
-  .hobbies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--sand); }
-  .hobby-card {
-    background: var(--paper); padding: 2rem;
-    display: flex; flex-direction: column; gap: 0.8rem;
-    transition: background 0.3s;
-  }
-  .hobby-card:hover { background: var(--white); }
-  .hobby-icon { font-size: 1.8rem; }
-  .hobby-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; }
-  .hobby-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+.contact-strip {
+  background: var(--teal); padding: 1.8rem 3rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 3rem; flex-wrap: wrap;
+}
+.contact-strip-label {
+  font-size: 0.72rem; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.15em; text-transform: uppercase;
+}
+.contact-item { display: flex; align-items: center; gap: 0.7rem; }
+.contact-item span { font-size: 1.1rem; }
+.contact-item a {
+  color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.85rem;
+  transition: color 0.2s;
+}
+.contact-item a:hover { color: var(--gold-lt); }
 
-  /* ── CONTACT ──────────────────────────────────────────────── */
-  #contact { background: var(--ink); color: var(--paper); text-align: center; }
-  #contact .section-label { color: var(--gold-lt); }
-  .contact-title {
-    font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 300; line-height: 1.1; margin-bottom: 2rem;
-  }
-  .contact-title em { font-style: italic; color: var(--gold); }
-  .contact-sub { font-size: 1rem; color: rgba(245,242,236,0.5); margin-bottom: 3.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
-  .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-  .contact-link {
-    padding: 0.9rem 2.5rem; border: 1px solid rgba(255,255,255,0.2);
-    color: var(--paper); text-decoration: none; font-size: 0.78rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    transition: border-color 0.3s, background 0.3s, color 0.3s;
-  }
-  .contact-link:hover { border-color: var(--gold); background: var(--gold); color: var(--ink); }
-  .contact-email {
-    margin-top: 3rem; font-family: var(--serif); font-size: 1.5rem;
-    font-style: italic; color: rgba(245,242,236,0.4);
-    transition: color 0.3s;
-  }
-  .contact-email:hover { color: var(--gold); }
-  .contact-email a { color: inherit; text-decoration: none; }
+/* ════════════════════════════════════════
+   PAGE: PROJECTS
+════════════════════════════════════════ */
+#projects { background: var(--white); padding-bottom: 5rem; }
 
-  /* ── FOOTER ───────────────────────────────────────────────── */
-  footer {
-    background: #111110; padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-name { font-family: var(--serif); font-size: 0.9rem; color: rgba(255,255,255,0.25); }
-  .footer-langs { font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); text-transform: uppercase; }
+.projects-intro {
+  max-width: 740px; margin: 0 auto; text-align: center;
+  padding: 3.5rem 3rem 0.5rem;
+  font-size: 0.92rem; color: #555; line-height: 1.9;
+}
 
-  /* ── ANIMATIONS ───────────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+.project-section { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
+.project-item {
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 3rem; align-items: start;
+  padding: 2.5rem 0; border-bottom: 1px solid var(--sand);
+}
+.project-item.reverse { grid-template-columns: 360px 1fr; }
+.project-item.reverse .project-text { order: 2; }
+.project-item.reverse .project-img { order: 1; }
+.project-type-label {
+  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.project-text h3 {
+  font-family: var(--serif); font-size: 1.55rem; font-weight: 400;
+  line-height: 1.25; margin-bottom: 0.9rem;
+}
+.project-text p { font-size: 0.87rem; color: #555; line-height: 1.85; margin-bottom: 0.7rem; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.9rem; }
+.project-tag {
+  font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.22rem 0.75rem; border: 1px solid var(--sand); color: var(--muted);
+}
+.project-img {
+  background: var(--sand); aspect-ratio: 16/10;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 0.78rem; letter-spacing: 0.05em;
+  position: relative; overflow: hidden;
+}
+.project-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.project-badge {
+  position: absolute; top: 0.7rem; right: 0.7rem;
+  font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.22rem 0.65rem; background: var(--teal); color: var(--white);
+}
+.thesis-block { max-width: var(--max); margin: 0 auto; padding: 0 3rem 1rem; }
+.thesis-inner {
+  padding: 2.5rem; border: 1px solid var(--sand); background: var(--paper); margin-top: 0;
+}
+.thesis-inner h3 {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem;
+}
+.thesis-inner p { font-size: 0.87rem; color: #555; line-height: 1.9; }
 
-  /* ── RESPONSIVE ───────────────────────────────────────────── */
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 2rem; }
-    #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
-    .hero-text { padding-right: 0; }
-    .hero-visual { display: none; }
-    section { padding: 5rem 2rem; }
-    .about-grid, .hobbies-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .skills-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-    .nav-links { display: none; }
-  }
-  @media (max-width: 600px) {
-    .skills-grid, .projects-grid, .hobbies-grid { grid-template-columns: 1fr; }
-  }
+/* ════════════════════════════════════════
+   PAGE: ACTIVITIES
+════════════════════════════════════════ */
+#activities { background: var(--white); padding-bottom: 5rem; }
+.activities-container { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
+
+.ngo-intro { font-size: 0.9rem; color: #555; line-height: 1.9; padding: 2rem 0 1rem; }
+.ngo-photos { display: flex; gap: 1.5rem; margin: 1rem 0 1.2rem; flex-wrap: wrap; }
+.ngo-photo {
+  width: 200px; height: 140px; background: var(--sand);
+  overflow: hidden; flex-shrink: 0; display: flex; align-items: center;
+  justify-content: center; color: var(--muted); font-size: 0.72rem;
+}
+.ngo-photo img { width: 100%; height: 100%; object-fit: cover; }
+.activity-link {
+  font-size: 0.78rem; color: var(--gold); text-decoration: none;
+  border-bottom: 1px solid var(--gold-lt); display: inline-block; margin-top: 0.5rem;
+}
+.activity-link:hover { color: var(--teal); border-color: var(--teal); }
+
+.edu-level-bar {
+  background: var(--teal); color: white;
+  padding: 0.6rem 1.2rem; font-size: 0.75rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin: 1.5rem 0 0;
+}
+.activity-item {
+  display: grid; grid-template-columns: 240px 1fr;
+  gap: 2.5rem; padding: 1.8rem 0; border-bottom: 1px solid var(--sand);
+  align-items: start;
+}
+.activity-tag-box {
+  background: var(--teal); padding: 1.2rem 1.4rem;
+  color: var(--white); text-align: center;
+}
+.activity-tag-box h4 { font-family: var(--serif); font-size: 1rem; font-weight: 400; line-height: 1.4; }
+.activity-tag-box span { font-size: 0.7rem; color: rgba(255,255,255,0.6); display: block; margin-top: 0.4rem; }
+.activity-text p { font-size: 0.87rem; color: #555; line-height: 1.85; margin-bottom: 0.6rem; }
+
+/* ════════════════════════════════════════
+   PAGE: HOBBIES
+════════════════════════════════════════ */
+#hobbies { background: var(--white); padding-bottom: 5rem; }
+.hobbies-hero {
+  text-align: center; padding: 3rem 3rem 1.5rem;
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
+  font-style: italic; color: var(--ink);
+  max-width: 700px; margin: 0 auto;
+}
+.hobbies-container { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
+.hobby-section { padding: 2.2rem 0; border-bottom: 1px solid var(--sand); }
+.hobby-section:last-child { border-bottom: none; }
+.hobby-section h3 {
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 400;
+  color: var(--teal); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.hobby-section h3 .hicon { font-size: 1.4rem; }
+.hobby-photo-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; margin-bottom: 1.2rem;
+}
+.hobby-photo {
+  aspect-ratio: 1; background: var(--sand);
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 0.72rem;
+}
+.hobby-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.hobby-photo:hover img { transform: scale(1.05); }
+.hobby-single {
+  max-width: 360px; height: 240px; background: var(--sand); margin: 0 0 1rem;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 0.75rem;
+}
+.hobby-single img { width: 100%; height: 100%; object-fit: cover; }
+.hobby-caption { font-size: 0.76rem; color: var(--muted); font-style: italic; margin-bottom: 0.8rem; }
+.hobby-text { font-size: 0.87rem; color: #555; line-height: 1.85; max-width: 620px; }
+
+/* ════════════════════════════════════════
+   PAGE: WORK EXPERIENCE
+════════════════════════════════════════ */
+#work-exp { background: var(--white); padding-bottom: 5rem; }
+
+.company-logos-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 3rem; align-items: center; justify-items: center;
+  max-width: var(--max); margin: 0 auto; padding: 3rem 3rem;
+}
+
+.company-logo {
+  width: 180px; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper); border: 1px solid var(--sand);
+  cursor: pointer; transition: all 0.3s;
+  border-radius: 4px;
+}
+.company-logo:hover {
+  border-color: var(--gold); transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.company-logo img { max-width: 90%; max-height: 90%; object-fit: contain; }
+
+.logo-text {
+  font-size: 1.2rem; font-weight: 600; text-align: center;
+  color: var(--teal);
+}
+
+/* Company-specific styles */
+.logo-lpa { color: var(--teal); }
+.logo-deutsche { color: #0066b3; }
+.logo-nexi { color: #e4003a; font-weight: 800; }
+.logo-deloitte { color: #1a1a18; }
+.logo-evonik { color: #cc0033; font-weight: 700; }
+.logo-welspun { color: #d4232c; font-weight: 800; }
+.logo-himatsignka { color: #003366; font-weight: 600; }
+
+/* ── FOOTER ────────────────────────────── */
+footer {
+  background: var(--teal); padding: 1.1rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-back {
+  font-size: 0.75rem; color: rgba(255,255,255,0.55);
+  cursor: pointer; text-decoration: none; letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.footer-back:hover { color: var(--gold-lt); }
+.footer-name { font-family: var(--serif); font-size: 0.88rem; color: rgba(255,255,255,0.35); }
+
+/* ── RESPONSIVE ────────────────────────── */
+@media (max-width: 900px) {
+  header { padding: 0 1.2rem; }
+  .nav-links li a { padding: 0.8rem 0.8rem; font-size: 0.74rem; }
+  .home-intro { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 2rem; gap: 2rem; }
+  .home-photo { max-width: 220px; }
+  .motivation-block { grid-template-columns: 1fr; padding: 0 1.5rem 1.5rem; }
+  .motivation-text { border-left: 1px solid var(--sand); border-top: none; }
+  .home-skills-grid { grid-template-columns: 1fr 1fr; padding: 0 1.5rem; }
+  .home-ctas { padding: 2rem 1.5rem 2.5rem; }
+  .contact-strip { gap: 1.5rem; padding: 1.5rem; }
+  .project-section, .activities-container, .hobbies-container, .thesis-block { padding: 0 1.5rem; }
+  .project-item, .project-item.reverse { grid-template-columns: 1fr; }
+  .project-item.reverse .project-text { order: 1; }
+  .project-item.reverse .project-img { order: 2; }
+  .activity-item { grid-template-columns: 1fr; }
+  .hobby-photo-grid { grid-template-columns: 1fr 1fr; }
+  .company-logos-grid { grid-template-columns: 1fr 1fr; }
+  footer { flex-direction: column; gap: 0.4rem; text-align: center; padding: 1rem; }
+}
+@media (max-width: 600px) {
+  .nav-links li a { padding: 0.7rem 0.5rem; font-size: 0.68rem; letter-spacing: 0.01em; }
+  .home-skills-grid { grid-template-columns: 1fr; }
+  .hobby-photo-grid { grid-template-columns: 1fr; }
+  .company-logos-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
+<!-- ══ HEADER ══════════════════════════════════════════ -->
+<header>
+  <div class="header-top">
+    <span class="header-title" onclick="showPage('home')">Jagruti Bidkar <span>— Consultant</span></span>
+  </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a class="active" data-page="home" onclick="showPage('home')">Home</a></li>
+      <li><a data-page="projects" onclick="showPage('projects')">Projects</a></li>
+      <li><a data-page="activities" onclick="showPage('activities')">Activities</a></li>
+      <li><a data-page="hobbies" onclick="showPage('hobbies')">Hobbies</a></li>
+      <li><a data-page="work-exp" onclick="showPage('work-exp')">Work Exp.</a></li>
+    </ul>
+  </nav>
+</header>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo">Jagruti Bidkar</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#hobbies">More</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<!-- ══════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════ -->
+<div id="home" class="page active">
 
-<!-- HERO -->
-<section id="hero" style="padding-top:8rem">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Consultant · Frankfurt, Germany</p>
-    <h1 class="hero-name">Jagruti<br/><em>Bidkar</em></h1>
-    <p class="hero-tagline">
-      Strategy & transformation consultant bridging data, operations, and digital change —
-      with experience across fintech, capital markets, and management consulting.
+  <div class="home-intro">
+    <div class="home-intro-text">
+      <p>Hello and welcome to my portfolio!</p>
+      <p>Hailing from Mumbai, I am building my career in Frankfurt at the intersection of <strong>data, strategy, and digital transformation</strong> in financial services. I am a balanced individual who loves adventure and outdoor activities — but also needs a quiet evening indoors, curled up with a good book.</p>
+      <p>I am passionate about digital transformation and the growing significance of data and automation in the Financial Services industry. I have been at the forefront of adopting and implementing these emerging developments across capital markets, payments, and regulatory operations.</p>
+      <p>As passionate as I am about data, I would always choose a handmade artistic card over a digital one!</p>
+    </div>
+    <div class="home-photo">
+      <div class="photo-placeholder">📷 Add your photo<br/><small>Replace with your image</small></div>
+    </div>
+  </div>
+
+  <div class="section-banner"><h2>My motivation to grow in consulting</h2></div>
+
+  <div class="motivation-block">
+    <div class="motivation-keys">
+      <div class="motivation-key">
+        <div class="motivation-key-icon">💡</div>
+        <div class="motivation-key-text">Strong passion for digitalization</div>
+      </div>
+      <div class="motivation-key">
+        <div class="motivation-key-icon">⚙️</div>
+        <div class="motivation-key-text">Hands-on experience in Tech. Strategy</div>
+      </div>
+      <div class="motivation-key">
+        <div class="motivation-key-icon">📊</div>
+        <div class="motivation-key-text">Data-driven analytical mindset</div>
+      </div>
+      <div class="motivation-key">
+        <div class="motivation-key-icon">🎯</div>
+        <div class="motivation-key-text">Alignment with Commerzbank's objectives</div>
+      </div>
+    </div>
+    <div class="motivation-text">
+      <p>Digital Transformation is disrupting traditional banking models and reshaping value creation mechanisms. I am particularly drawn to Digitalization in the banking sector, daring my internship with Deloitte Consulting, which helped me realize the exciting and dynamic nature of the digital banking landscape.</p>
+      <p>This exposure had me to explore the PSD2 regulation facilitating Open Banking in the EU. Through analyzing consumer adoption of Open API technology. My interest in the Decentralized Finance ecosystem, prompted me to study Blockchain as an objective. Commerzbank, a pioneer in Digital Banking solutions, and is at the forefront of adopting blockchain technology for trading assets. By joining Commerzbank's International Digital Development Program, I aim to pursue my interests while ensuring personal growth alongside industry leaders.</p>
+    </div>
+  </div>
+
+  <div class="section-banner"><h2>What I bring to the team</h2></div>
+
+  <div class="home-skills-grid">
+    <div class="home-skill-card">
+      <div class="home-skill-icon">💡</div>
+      <div class="home-skill-name">Innovation & Adaptability</div>
+      <div class="home-skill-desc">Curious to learn about new digital applications</div>
+    </div>
+    <div class="home-skill-card">
+      <div class="home-skill-icon">📊</div>
+      <div class="home-skill-name">Analytical and Problem Solving Skills</div>
+      <div class="home-skill-desc">Motivated to grow with the team</div>
+    </div>
+    <div class="home-skill-card">
+      <div class="home-skill-icon">🤝</div>
+      <div class="home-skill-name">Critical Thinking Skills</div>
+      <div class="home-skill-desc">Team player & collaborative attitude</div>
+    </div>
+    <div class="home-skill-card">
+      <div class="home-skill-icon">🎨</div>
+      <div class="home-skill-name">A creative mindset</div>
+      <div class="home-skill-desc">Passion about Digital Banking</div>
+    </div>
+  </div>
+
+  <div class="section-banner"><h2>Professional Experience</h2></div>
+  
+  <div class="home-logos-strip">
+    <span class="logo-text logo-lpa" onclick="showPage('work-exp')">LPA</span>
+    <span class="logo-text logo-deutsche" onclick="showPage('work-exp')">Deutsche Börse</span>
+    <span class="logo-text logo-nexi" onclick="showPage('work-exp')">nexi</span>
+    <span class="logo-text logo-deloitte" onclick="showPage('work-exp')">Deloitte</span>
+    <span class="logo-text logo-evonik" onclick="showPage('work-exp')">Evonik</span>
+    <span class="logo-text logo-welspun" onclick="showPage('work-exp')">Welspun</span>
+  </div>
+
+  <div class="section-banner"><h2>Explore more</h2></div>
+
+  <div class="home-ctas">
+    <div class="cta-card" onclick="showPage('projects')">
+      <div class="cta-icon">📋</div>
+      <div><span class="cta-label">Projects</span></div>
+      <div class="cta-desc">Academic and professional projects across digital transformation, data, and strategy.</div>
+    </div>
+    <div class="cta-card" onclick="showPage('activities')">
+      <div class="cta-icon">👥</div>
+      <div><span class="cta-label">Activities</span></div>
+      <div class="cta-desc">Leadership, NGO involvement, and university events that shaped who I am.</div>
+    </div>
+    <div class="cta-card" onclick="showPage('hobbies')">
+      <div class="cta-icon">🎨</div>
+      <div><span class="cta-label">Hobbies</span></div>
+      <div class="cta-desc">The person behind the CV — art, books, travel, and everything in between.</div>
+    </div>
+  </div>
+
+  <div class="contact-strip">
+    <div class="contact-strip-label">Get in touch</div>
+    <div class="contact-item"><span>✉️</span><a href="mailto:jbidkar@gmail.com">jbidkar@fs-students.de</a></div>
+    <div class="contact-item"><span>📱</span><a href="tel:+4917685952655">+49 176 8595 2655</a></div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════
+     PAGE: PROJECTS
+══════════════════════════════════════ -->
+<div id="projects" class="page">
+
+  <div class="projects-intro">
+    <p>I have gained insights into how a firm's IT Architecture functions, and the role of Transformation and Change Management for implementing a successful Digital Transformation. Check out some interesting group projects I have worked on!</p>
+  </div>
+
+  <div class="section-banner"><h2>Course: Digital Innovation</h2></div>
+  <div class="project-section">
+    <div class="project-item">
+      <div class="project-text">
+        <div class="project-type-label">AI Application · Design Thinking</div>
+        <h3>InterAI — Interior Design App</h3>
+        <p>Developed an AI-based application as part of a Digital Innovation Challenge following the Design Thinking methodology. Conducted qualitative analysis to understand consumer pain points in home design.</p>
+        <p>Leveraged DALL-E capabilities to help customers scan and (re-)design their living space based on chosen style, structural features, and budget.</p>
+        <div class="project-tags">
+          <span class="project-tag">AI / DALL-E</span><span class="project-tag">Design Thinking</span>
+          <span class="project-tag">UX Research</span><span class="project-tag">App Prototype</span>
+        </div>
+      </div>
+      <div class="project-img">
+        <span class="project-badge">Group Project</span>
+        📱 App Prototype — InterAI
+      </div>
+    </div>
+  </div>
+
+  <div class="section-banner"><h2>Course: Information Systems</h2></div>
+  <div class="project-section">
+    <div class="project-item reverse">
+      <div class="project-text">
+        <div class="project-type-label">IT Transformation · Change Management</div>
+        <h3>Daimler Truck AG — IT Carve-Out</h3>
+        <p>Managing the IT Carve-out of approximately 200 global projects. Stepped into the shoes of the TMO and developed a transformation and change management plan with a structured 3-step approach.</p>
+        <p>Built skills in stakeholder engagement, root cause analysis, and risk mitigation to drive complex IT transformations aligned to business strategy.</p>
+        <div class="project-tags">
+          <span class="project-tag">IT Carve-Out</span><span class="project-tag">Change Management</span>
+          <span class="project-tag">Stakeholder Engagement</span><span class="project-tag">Risk Mitigation</span>
+        </div>
+      </div>
+      <div class="project-img">
+        <span class="project-badge">Company Project</span>
+        🚛 Daimler Truck AG
+      </div>
+    </div>
+  </div>
+
+  <div class="section-banner"><h2>Course: Digital Transformation</h2></div>
+  <div class="project-section">
+    <div class="project-item">
+      <div class="project-text">
+        <div class="project-type-label">AI Strategy · Music Tech</div>
+        <h3>Thomann — AI Music Market Strategy</h3>
+        <p>Developed a business strategy for Thomann to become a key player in the AI Music market. Created a version of "Jingle Bells" using Suno AI and shared it on TikTok to measure consumer engagement with AI-generated music.</p>
+        <p>Conducted comprehensive research on the AI Music landscape and proposed strategies for Thomann to enter via an AI-as-a-Service model.</p>
+        <div class="project-tags">
+          <span class="project-tag">AI Strategy</span><span class="project-tag">Market Research</span>
+          <span class="project-tag">AI-as-a-Service</span><span class="project-tag">Consumer Research</span>
+        </div>
+      </div>
+      <div class="project-img">
+        <span class="project-badge">Company Project</span>
+        🎵 Thomann AI Strategy
+      </div>
+    </div>
+  </div>
+
+  <div class="section-banner"><h2>Master's Thesis</h2></div>
+  <div class="thesis-block">
+    <div class="thesis-inner">
+      <h3>Understanding Consumer Adoption of Open Banking</h3>
+      <p>A combined qualitative and quantitative research approach using surveys to understand consumer knowledge, preferences, and concerns regarding data sharing and adoption of Third Party Applications under the revised PSD2 regulation. The study provides strategic insights into barriers and enablers for Open Banking adoption across European consumer segments.</p>
+      <div class="project-tags" style="margin-top:1rem">
+        <span class="project-tag">Open Banking</span><span class="project-tag">PSD2</span>
+        <span class="project-tag">Consumer Research</span><span class="project-tag">Mixed Methods</span><span class="project-tag">FinTech</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /projects -->
+
+<!-- ══════════════════════════════════════
+     PAGE: ACTIVITIES
+══════════════════════════════════════ -->
+<div id="activities" class="page">
+
+  <div class="section-banner" style="margin-top:2rem"><h2>Katalyst India (NGO)</h2></div>
+
+  <div class="activities-container">
+    <p class="ngo-intro">
+      Being part of <strong>Katalyst India</strong>, an NGO for economically challenged women in tech, for four years during my bachelor's journey was incredibly rewarding. I had access to training sessions for personal development and mentorship programs with mentors from renowned industries. Later I was in a position to give back — mentoring school kids and organising tree plantation drives. This experience was not only fulfilling but also a great way to give back to the community while learning valuable leadership and organizational skills along the way!
     </p>
-    <div class="hero-ctas">
-      <a href="#experience" class="btn-primary">View my work</a>
-      <a href="#contact" class="btn-ghost">Let's connect</a>
+    <div class="ngo-photos">
+      <div class="ngo-photo">📷 NGO Photo 1</div>
+      <div class="ngo-photo">📷 NGO Photo 2</div>
+    </div>
+    <a href="https://linkedin.com" target="_blank" class="activity-link">→ Click here for LinkedIn Page: Katalyst India</a>
+  </div>
+
+  <div class="section-banner"><h2>University Events</h2></div>
+
+  <div class="activities-container">
+    <div class="edu-level-bar">Masters</div>
+    
+    <div class="activity-item">
+      <div class="activity-tag-box">
+        <h4>Frankfurt School Business Games (FSBG)</h4>
+        <span>Operations Member</span>
+      </div>
+      <div class="activity-text">
+        <p>An international business case study competition organised by Frankfurt School. As an Operations Member, I interacted with international students and learned to manage an international event end-to-end.</p>
+        <a href="https://linkedin.com" target="_blank" class="activity-link">→ Click here for LinkedIn Page – FSBG</a>
+      </div>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-tag-box">
+        <h4>TEDxFS</h4>
+        <span>Operations Member</span>
+      </div>
+      <div class="activity-text">
+        <p>An event bringing scholars, explorers, and enthusiasts together at Frankfurt School of Finance and Management. I had the opportunity to co-ordinate with guest speakers and successfully organize the event alongside the TEDxFS team.</p>
+        <a href="https://linkedin.com" target="_blank" class="activity-link">→ Click here for LinkedIn Page – TEDxFS</a>
+      </div>
+    </div>
+
+    <div class="edu-level-bar" style="margin-top:1.5rem">Bachelors</div>
+
+    <div class="activity-item">
+      <div class="activity-tag-box">
+        <h4>VASTRA (Tech Fest)</h4>
+        <span>Event Head — Product Marketing</span>
+      </div>
+      <div class="activity-text">
+        <p>A textile technology fest organizing various competitions in collaboration with textile and fashion companies. As the Event Head, I managed end-to-end event execution with a team of 7 members. The experience helped me build on my leadership and stakeholder management skills.</p>
+      </div>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-tag-box">
+        <h4>Rangawardhan (Cultural Fest)</h4>
+        <span>Department Head — Performing Arts</span>
+      </div>
+      <div class="activity-text">
+        <p>A cultural event celebrating state culture by organizing various events such as Dance Competitions, Street-plays, Theatrical Dramas and fun activities such as a troll and treasure hunts throughout the year! As the Department Head I was responsible for handling the social media account and digital marketing of the event. In addition, I also managed the participants and back-stage activities of 2 events with a team of 10 members.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /activities -->
+
+<!-- ══════════════════════════════════════
+     PAGE: HOBBIES
+══════════════════════════════════════ -->
+<div id="hobbies" class="page">
+
+  <div class="hobbies-hero">"All work and no play makes everyone dull!"</div>
+
+  <div class="hobbies-container">
+
+    <div class="hobby-section">
+      <h3><span class="hicon">🎨</span> Art — Sketching & Painting</h3>
+      <div class="hobby-photo-grid">
+        <div class="hobby-photo">📷 Painting</div>
+        <div class="hobby-photo">📷 Sketch</div>
+        <div class="hobby-photo">📷 Art work</div>
+      </div>
+      <p class="hobby-text">Visual thinking that feeds directly into how I approach slide design and data storytelling. I find the structured creativity of art closely mirrors the consulting process — define a blank canvas, choose your tools, and iterate until the story is clear.</p>
+    </div>
+
+    <div class="hobby-section">
+      <h3><span class="hicon">📚</span> Reading</h3>
+      <div class="hobby-single">📷 Bookshelf photo</div>
+      <p class="hobby-caption">My bookshelf</p>
+      <p class="hobby-text">Books have been an integral part of my childhood — one of the perks of having a librarian for a mother! I enjoy reading classics, philosophy, strategy, and non-fiction in my free time.</p>
+    </div>
+
+    <div class="hobby-section">
+      <h3><span class="hicon">✈️</span> Trekking & Travelling</h3>
+      <div class="hobby-single">📷 Trekking photo</div>
+      <p class="hobby-caption">Trekking, travelling</p>
+      <p class="hobby-text">Exploring cultures across Europe and India — every trip sharpens cross-cultural communication. Travelled to 5 countries within the EU since 2022.</p>
+    </div>
+
+    <div class="hobby-section">
+      <h3><span class="hicon">⚽</span> Sports</h3>
+      <p class="hobby-text">Team sports instilled the discipline and collaborative mindset I bring to every project. The ability to perform under pressure, adapt mid-game, and support your team are skills I carry directly into consulting work.</p>
+    </div>
+
+  </div>
+
+</div><!-- /hobbies -->
+
+<!-- ══════════════════════════════════════
+     PAGE: WORK EXPERIENCE
+══════════════════════════════════════ -->
+<div id="work-exp" class="page">
+
+  <div class="section-banner" style="margin-top:2rem"><h2>Professional Experience</h2></div>
+
+  <div class="company-logos-grid">
+    <div class="company-logo">
+      <div class="logo-text logo-lpa">LPA</div>
+    </div>
+    <div class="company-logo">
+      <div class="logo-text logo-deutsche">Deutsche Börse</div>
+    </div>
+    <div class="company-logo">
+      <div class="logo-text logo-nexi">nexi</div>
+    </div>
+    <div class="company-logo">
+      <div class="logo-text logo-deloitte">Deloitte</div>
+    </div>
+    <div class="company-logo">
+      <div class="logo-text logo-evonik">Evonik</div>
+    </div>
+    <div class="company-logo">
+      <div class="logo-text logo-welspun">Welspun</div>
+    </div>
+    <div class="company-logo">
+      <div class="logo-text logo-himatsignka">Himatsingka</div>
     </div>
   </div>
-  <div class="hero-visual">
-    <div class="hero-photo-frame">
-      <div class="hero-photo-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-        </svg>
-        <img src="Gemini_Generated_Image_vjy31ovjy31ovjy3.png" alt="Profile photo" style="width: 100%; height: auto;">
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Years exp.</span></div>
-      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Countries</span></div>
-      <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Industries</span></div>
-    </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <span class="section-label reveal">About</span>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <h2 class="section-title">Consulting at the <em>intersection</em> of data and strategy</h2>
-        <div class="divider"></div>
-        <p>
-          I'm a Frankfurt-based consultant with a Masters in Management (Digital Business, Technology & Operations)
-          from <strong>Frankfurt School of Finance and Management</strong> and a STEM background in Textile Technology.
-        </p>
-        <p>
-          My career spans <strong>capital markets, payments, regulatory governance, and technology transformation</strong> —
-          giving me a rare end-to-end view from data pipelines to boardroom strategy.
-        </p>
-        <p>
-          Currently at <strong>Lucht Probst Associates</strong>, I deliver OTC & Structured Products projects for six clients,
-          consistently reducing delivery times and improving retention metrics through rigorous analysis and clear communication.
-        </p>
-      </div>
-      <div class="about-highlights reveal reveal-delay-1">
-        <div class="highlight-item">
-          <div class="highlight-icon">I</div>
-          <div class="highlight-content">
-            <h4>Industry Focus</h4>
-            <p>Capital markets, fintech, payments, and digital transformation in financial services.</p>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">A</div>
-          <div class="highlight-content">
-            <h4>Analytical Edge</h4>
-            <p>SQL, Python, PowerBI, and SAP — fluent in translating raw data into executive insights.</p>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">L</div>
-          <div class="highlight-content">
-            <h4>Languages</h4>
-            <p>English & Hindi (bilingual), Marathi (native), German (B2) — effective across global teams.</p>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">E</div>
-          <div class="highlight-content">
-            <h4>Education</h4>
-            <p>Frankfurt School of Finance & Management — Masters in Management, Digital Business &amp; Technology.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+</div><!-- /work-exp -->
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <span class="section-label reveal">Experience</span>
-    <h2 class="section-title reveal">A track record of <em>measurable</em> impact</h2>
-
-    <div class="exp-list">
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <span class="exp-date">Jan 2025 — Present</span>
-          <div class="exp-company">Lucht Probst Associates GmbH<br/>Frankfurt, Germany</div>
-        </div>
-        <div class="exp-detail">
-          <div class="exp-role">Jr. Consultant — Client Delivery OTC & Structured Products</div>
-          <ul class="exp-bullets">
-            <li>Orchestrated communication across cross-functional teams and six clients, achieving a <strong>30% reduction</strong> in project delivery times.</li>
-            <li>Led client feedback and testing cycles during platform upgrades, contributing to a <strong>20% increase</strong> in client retention metrics.</li>
-          </ul>
-          <span class="exp-tag">Consulting · Capital Markets</span>
-        </div>
-      </div>
-
-      <div class="exp-item reveal reveal-delay-1">
-        <div class="exp-meta">
-          <span class="exp-date">Jun — Nov 2024</span>
-          <div class="exp-company">Deutsche Boerse Group<br/>Frankfurt, Germany</div>
-        </div>
-        <div class="exp-detail">
-          <div class="exp-role">Intern — Regulatory Admissions & Governance</div>
-          <ul class="exp-bullets">
-            <li>Supported integration of new market participants coordinating regulatory, IT, and operations teams for Trading & Clearing onboarding.</li>
-            <li>Maintained <strong>98% compliance standards</strong> by monitoring process metrics and identifying inefficiencies.</li>
-          </ul>
-          <span class="exp-tag">Regulation · Operations</span>
-        </div>
-      </div>
-
-      <div class="exp-item reveal reveal-delay-2">
-        <div class="exp-meta">
-          <span class="exp-date">Nov 2023 — May 2024</span>
-          <div class="exp-company">Nexi Group<br/>Frankfurt, Germany</div>
-        </div>
-        <div class="exp-detail">
-          <div class="exp-role">Data Analyst — Card Scheme Fees</div>
-          <ul class="exp-bullets">
-            <li>Synthesized monthly payment scheme and transaction data across global regions, presenting actionable insights on transaction cycle trends.</li>
-            <li>Implemented automated data quality checks using Power Query, reducing manual processing time by <strong>50%</strong>.</li>
-          </ul>
-          <span class="exp-tag">Data Analysis · Payments</span>
-        </div>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          <span class="exp-date">Apr — Aug 2023</span>
-          <div class="exp-company">Deloitte Consulting GmbH<br/>Frankfurt, Germany</div>
-        </div>
-        <div class="exp-detail">
-          <div class="exp-role">Technology Strategy & Transformation — Banking</div>
-          <ul class="exp-bullets">
-            <li>Spearheaded user stories and process maps for three Digital Transformation projects, increasing team productivity by <strong>25%</strong>.</li>
-            <li>Conducted research on Banking Operations using data-driven techniques to assess risks and develop process improvement strategies.</li>
-          </ul>
-          <span class="exp-tag">Strategy · Digital Transformation</span>
-        </div>
-      </div>
-
-      <div class="exp-item reveal reveal-delay-1">
-        <div class="exp-meta">
-          <span class="exp-date">Feb 2020 — Jun 2022</span>
-          <div class="exp-company">Welspun Global Brands Ltd<br/>Mumbai, India</div>
-        </div>
-        <div class="exp-detail">
-          <div class="exp-role">Project Management — US Retail Accounts</div>
-          <ul class="exp-bullets">
-            <li>Achieved a <strong>25% increase</strong> in product placement and <strong>15% boost</strong> in sales revenue across 50+ retail locations for Walmart & Sam's Club.</li>
-            <li>Managed two B2B retailer accounts with combined revenue of <strong>$100M</strong>, improving on-time delivery by 15%.</li>
-          </ul>
-          <span class="exp-tag">Project Management · B2B</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <span class="section-label reveal">Skills</span>
-    <h2 class="section-title reveal">Tools I use to <em>get things done</em></h2>
-    <div class="skills-grid reveal">
-      <div class="skill-card">
-        <div class="skill-cat">Business Intelligence</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">SQL</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Python</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:85%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">PowerBI</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:88%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Power Query</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Data & ERP</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">SAP BW/4HANA</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:65%"></div></div>
-            <span class="skill-level">Intermediate</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">JavaScript</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:75%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Microsoft Excel</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:98%"></div></div>
-            <span class="skill-level">Expert</span>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Project & CRM</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">JIRA</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Salesforce</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:88%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Agile / Scrum</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:85%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Consulting</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">Process Mapping</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:92%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Stakeholder Mgmt.</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Market Research</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:87%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <span class="section-label reveal">Projects</span>
-    <h2 class="section-title reveal">Building things that <em>matter</em></h2>
-    <div class="projects-grid reveal">
-
-      <div class="project-card">
-        <span class="project-wip">Live</span>
-        <div class="project-type">Consulting · Data</div>
-        <h3 class="project-name">German Fintech Market Dashboard</h3>
-        <p class="project-desc">Interactive PowerBI-style web dashboard visualizing German fintech market trends — built to demonstrate consulting-grade data storytelling using public datasets.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">SQL</span>
-          <span class="project-tag">HTML/CSS</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-wip">In Progress</span>
-        <div class="project-type">Automation · Finance</div>
-        <h3 class="project-name">Payment Fee Report Automator</h3>
-        <p class="project-desc">Inspired by Nexi work — a tool that ingests CSV transaction data and auto-generates a clean visual HTML report, reducing manual reporting from hours to seconds.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Pandas</span>
-          <span class="project-tag">Jinja2</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-wip">In Progress</span>
-        <div class="project-type">Product · Web App</div>
-        <h3 class="project-name">Compliance Tracker MVP</h3>
-        <p class="project-desc">A lightweight web app for regulatory onboarding checklists, inspired by Deutsche Boerse governance work. Targets SMEs navigating EU compliance requirements.</p>
-        <div class="project-tags">
-          <span class="project-tag">React</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Airtable</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Case Study · Strategy</div>
-        <h3 class="project-name">OTC Derivatives Explainer Site</h3>
-        <p class="project-desc">An educational microsite explaining OTC and structured products for non-specialist audiences — demonstrating both subject matter expertise and web communication skills.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">Content Strategy</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Research · Consulting</div>
-        <h3 class="project-name">Digital Transformation in Banking</h3>
-        <p class="project-desc">A research deep-dive based on Deloitte project experience — analyzing transformation patterns, common failure modes, and best practices across European banks.</p>
-        <div class="project-tags">
-          <span class="project-tag">Research</span>
-          <span class="project-tag">Strategy</span>
-          <span class="project-tag">Write-up</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Personal · Portfolio</div>
-        <h3 class="project-name">This Portfolio Site</h3>
-        <p class="project-desc">Designed in Figma and built from scratch in HTML/CSS/JS — a live demonstration of learning web development as a consulting professional.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Figma</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- HOBBIES -->
-<section id="hobbies">
-  <div class="container">
-    <span class="section-label reveal">Get to Know Me</span>
-    <div class="hobbies-layout">
-      <div class="reveal">
-        <h2 class="section-title">Beyond the <em>spreadsheets</em></h2>
-        <div class="divider"></div>
-        <p class="hobbies-quote">
-          "I believe the best consultants are<br/>
-          <span>curious people first</span> —<br/>
-          and professionals second."
-        </p>
-      </div>
-      <div class="hobbies-grid reveal reveal-delay-1">
-        <div class="hobby-card">
-          <div class="hobby-icon">✈️</div>
-          <div class="hobby-name">Travelling</div>
-          <div class="hobby-desc">Exploring cultures across Europe and Asia — every trip sharpens cross-cultural communication.</div>
-        </div>
-        <div class="hobby-card">
-          <div class="hobby-icon">📚</div>
-          <div class="hobby-name">Reading</div>
-          <div class="hobby-desc">Strategy, biographies, and the occasional thriller. Always have a book on the go.</div>
-        </div>
-        <div class="hobby-card">
-          <div class="hobby-icon">🎨</div>
-          <div class="hobby-name">Sketching & Painting</div>
-          <div class="hobby-desc">Visual thinking that feeds directly into how I approach slide design and data storytelling.</div>
-        </div>
-        <div class="hobby-card">
-          <div class="hobby-icon">⚽</div>
-          <div class="hobby-name">Sports</div>
-          <div class="hobby-desc">Team sports instilled the discipline and collaborative mindset I bring to every project.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <span class="section-label">Contact</span>
-    <h2 class="contact-title">Let's work<br/><em>together</em></h2>
-    <p class="contact-sub">Open to consulting opportunities, MBB applications, and select freelance projects across data, strategy, and digital transformation.</p>
-    <div class="contact-links">
-      <a href="mailto:jbidkar@gmail.com" class="contact-link">Email me</a>
-      <a href="https://linkedin.com" target="_blank" class="contact-link">LinkedIn</a>
-      <a href="#" class="contact-link">Download CV</a>
-    </div>
-    <div class="contact-email"><a href="mailto:jbidkar@gmail.com">jbidkar@gmail.com</a></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
 <footer>
-  <span class="footer-name">Jagruti Bidkar © 2025</span>
-  <span class="footer-langs">DE · EN · HI · MR</span>
+  <a class="footer-back" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to Top · Home</a>
+  <span class="footer-name">Jagruti Bidkar</span>
 </footer>
 
 <script>
-// ── Cursor ──
-const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top  = e.clientY + 'px';
-});
-document.querySelectorAll('a, button, .exp-item, .project-card, .skill-card, .hobby-card').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-});
-
-// ── Nav scroll ──
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// ── Scroll reveal ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ── Skill bar animation ──
-const barObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => bar.classList.add('animated'));
-    }
+// ── Page navigation ──────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === id);
   });
-}, { threshold: 0.3 });
-document.querySelectorAll('.skills-grid').forEach(el => barObserver.observe(el));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Prevent default anchor behaviour ────
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
 </script>
 </body>
 </html>
