@@ -16,28 +16,35 @@
   --muted:#7a756c;
   --serif:'Cormorant Garamond', serif;
   --sans:'DM Sans', sans-serif;
-  --max:1100px;
+  --max:1200px;
 }
 
-body {
-  margin:0;
-  font-family:var(--sans);
-  background:var(--paper);
-  color:var(--ink);
+body { margin:0; font-family:var(--sans); background:var(--paper); color:var(--ink); }
+
+/* NAV */
+nav {
+  position:fixed; top:0; width:100%; padding:20px 40px;
+  display:flex; justify-content:space-between;
+  background:white; z-index:10;
 }
+.nav-links { display:flex; gap:20px; list-style:none; }
+.nav-links a { text-decoration:none; color:var(--ink); }
+
+/* HERO */
+#hero { padding:120px 40px; display:flex; justify-content:space-between; }
+.hero-name { font-size:3rem; font-family:var(--serif); }
 
 /* SECTION */
-section { padding:80px 20px; }
+section { padding:80px 40px; }
 .container { max-width:var(--max); margin:auto; }
 
-/* TITLE */
 .section-title {
   font-family:var(--serif);
   font-size:2.5rem;
   margin-bottom:40px;
 }
 
-/* TIMELINE */
+/* EXPERIENCE */
 .exp-timeline-header {
   display:flex;
   justify-content:space-between;
@@ -62,7 +69,6 @@ section { padding:80px 20px; }
   color:var(--gold);
 }
 
-/* PANELS */
 .exp-panel { display:none; }
 .exp-panel.active { display:block; }
 
@@ -98,6 +104,24 @@ section { padding:80px 20px; }
 
 <body>
 
+<!-- NAV -->
+<nav>
+  <div>Jagruti Bidkar</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#experience">Experience</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <h1 class="hero-name">Jagruti Bidkar</h1>
+    <p>Consultant — Data, Strategy, Digital Transformation</p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
 <section id="experience">
 <div class="container">
 
@@ -134,9 +158,9 @@ section { padding:80px 20px; }
 
       <ul class="exp-bullets">
         <li><strong>Led delivery coordination</strong> across 6 client accounts</li>
-        <li><strong>Reduced escalations by 15%</strong> through better documentation</li>
-        <li>Managed backlog, timelines, and stakeholder alignment</li>
-        <li>Bridged technical teams and clients on OTC implementations</li>
+        <li><strong>Reduced escalations by 15%</strong></li>
+        <li>Managed timelines and stakeholder alignment</li>
+        <li>Bridged business and tech teams</li>
       </ul>
     </div>
   </div>
@@ -154,10 +178,9 @@ section { padding:80px 20px; }
       <div class="exp-role-title">Data Analyst</div>
 
       <ul class="exp-bullets">
-        <li>Analysed payment datasets across European markets</li>
-        <li><strong>Reduced reporting time by 50%</strong> via automation</li>
-        <li><strong>Identified €50k+ savings</strong> using SQL</li>
-        <li>Delivered insights for pricing and operations</li>
+        <li>Analysed payment datasets</li>
+        <li><strong>Reduced reporting time by 50%</strong></li>
+        <li><strong>Identified €50k+ savings</strong></li>
       </ul>
     </div>
   </div>
@@ -175,9 +198,9 @@ section { padding:80px 20px; }
       <div class="exp-role-title">Key Account Manager</div>
 
       <ul class="exp-bullets">
-        <li><strong>Drove 15% revenue growth</strong> across retail locations</li>
-        <li>Managed <strong>$100M+ accounts</strong></li>
-        <li>Improved delivery timelines and operations</li>
+        <li><strong>Drove 15% revenue growth</strong></li>
+        <li>Managed $100M+ accounts</li>
+        <li>Improved operations</li>
       </ul>
     </div>
   </div>
