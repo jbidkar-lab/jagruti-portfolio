@@ -199,89 +199,163 @@ nav { display: flex; align-items: center; padding: 0; }
 /* ════════════════════════════════════════
    PAGE: EXPERIENCE
 ════════════════════════════════════════ */
-#experience { background: var(--white); padding-bottom: 5rem; }
+<div id="experience" class="page">
 
-.logo-strip {
-  display: flex; align-items: stretch; justify-content: center;
-  gap: 0; flex-wrap: wrap;
-  padding: 2.5rem 3rem 0;
-  max-width: var(--max); margin: 0 auto;
-  border-bottom: 2px solid var(--sand);
-}
-.company-logo-btn {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 0.6rem; padding: 1.4rem 2.2rem;
-  cursor: pointer; border-bottom: 3px solid transparent;
-  transition: border-color 0.2s, background 0.2s;
-  background: transparent; border-top: none; border-left: none; border-right: none;
-  min-width: 140px;
-}
-.company-logo-btn:hover { background: #fdfaf6; }
-.company-logo-btn.active { border-bottom-color: var(--gold); background: #fdfaf6; }
+  <div class="section-banner" style="margin-top:2rem"><h2>Professional Experience</h2></div>
 
-/* Styled text logos — each company styled distinctively */
-.logo-nexi {
-  font-size: 1.8rem; font-weight: 800; color: #e4003a;
-  letter-spacing: -0.03em; font-family: var(--sans);
-}
-.logo-deloitte {
-  font-size: 1.4rem; font-weight: 700; color: #1a1a18;
-  font-family: var(--sans); letter-spacing: -0.02em;
-}
-.logo-deloitte em { color: #86bc25; font-style: normal; }
-.logo-deutsche {
-  font-size: 0.85rem; font-weight: 600; color: #0066b3;
-  font-family: var(--sans); letter-spacing: 0.02em; text-align: center; line-height: 1.3;
-}
-.logo-lpa {
-  font-size: 0.88rem; font-weight: 600; color: var(--teal);
-  font-family: var(--sans); letter-spacing: 0.01em; text-align: center; line-height: 1.3;
-}
-.logo-welspun {
-  font-size: 1.2rem; font-weight: 800; color: #d4232c;
-  font-family: var(--sans); letter-spacing: 0.04em;
-}
-.logo-date {
-  font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted);
-  text-transform: uppercase; text-align: center;
-}
+  <!-- Logo tab strip -->
+  <div class="logo-strip">
+    <button class="company-logo-btn active" onclick="showExp('lpa',this)">
+      <div class="logo-lpa">Lucht Probst<br/>Associates</div>
+      <div class="logo-date">Jan 2025 – Present</div>
+    </button>
+    <button class="company-logo-btn" onclick="showExp('deutsche',this)">
+      <div class="logo-deutsche">Deutsche<br/>Börse Group</div>
+      <div class="logo-date">Jun – Nov 2024</div>
+    </button>
+    <button class="company-logo-btn" onclick="showExp('nexi',this)">
+      <div class="logo-nexi">nexi</div>
+      <div class="logo-date">Nov 2023 – May 2024</div>
+    </button>
+    <button class="company-logo-btn" onclick="showExp('deloitte',this)">
+      <div class="logo-deloitte">Deloitte<em>.</em></div>
+      <div class="logo-date">Apr – Aug 2023</div>
+    </button>
+    <button class="company-logo-btn" onclick="showExp('welspun',this)">
+      <div class="logo-welspun">Welspun</div>
+      <div class="logo-date">Feb 2020 – Jun 2022</div>
+    </button>
+  </div>
 
-.exp-panels { max-width: var(--max); margin: 0 auto; padding: 2rem 3rem 0; }
-.exp-panel { display: none; }
-.exp-panel.active { display: block; animation: pageFade 0.35s var(--ease); }
+  <div class="exp-panels">
 
-.exp-panel-inner {
-  display: grid; grid-template-columns: 210px 1fr;
-  gap: 3rem; padding: 2.5rem; border: 1px solid var(--sand); background: var(--paper);
-}
-.exp-panel-meta { padding-top: 0.2rem; }
-.exp-dates {
-  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.5rem; display: block;
-}
-.exp-company-name {
-  font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
-  color: var(--teal); margin-bottom: 0.3rem; line-height: 1.35;
-}
-.exp-location { font-size: 0.76rem; color: var(--muted); margin-bottom: 1rem; }
-.exp-meta-note { font-size: 0.76rem; color: #666; line-height: 1.6; font-style: italic; }
-.exp-role-title {
-  font-family: var(--serif); font-size: 1.55rem; font-weight: 400;
-  line-height: 1.2; margin-bottom: 0.35rem;
-}
-.exp-role-sub { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 1.4rem; }
-.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-.exp-bullets li {
-  font-size: 0.87rem; color: #555; padding-left: 1.2rem;
-  position: relative; line-height: 1.8;
-}
-.exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
-.exp-bullets li strong { color: var(--ink); font-weight: 500; }
-.exp-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.2rem; }
-.exp-tag {
-  font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 0.22rem 0.75rem; border: 1px solid var(--sand); color: var(--muted);
-}
+    <div class="exp-panel active" id="exp-lpa">
+      <div class="exp-panel-inner">
+        <div class="exp-panel-meta">
+          <span class="exp-dates">Jan 2025 — Present</span>
+          <div class="exp-company-name">Lucht Probst Associates GmbH</div>
+          <div class="exp-location">Frankfurt, Germany</div>
+          <div class="divider"></div>
+          <div class="exp-meta-note">Capital markets consultancy specialising in OTC & Structured Products.</div>
+        </div>
+        <div>
+          <div class="exp-role-title">Jr. Consultant</div>
+          <div class="exp-role-sub">Client Delivery — OTC & Structured Products</div>
+          <ul class="exp-bullets">
+            <li>Orchestrated communication between cross-functional teams and six clients, achieving a <strong>30% reduction</strong> in project delivery times through streamlined workflow coordination.</li>
+            <li>Led client feedback and testing cycles during platform upgrades, translating stakeholder input into actionable improvements — contributing to a <strong>20% increase</strong> in client retention metrics.</li>
+            <li>Aligned technical implementation with client goals across multiple concurrent delivery streams.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">OTC Derivatives</span><span class="exp-tag">Client Delivery</span>
+            <span class="exp-tag">Stakeholder Mgmt</span><span class="exp-tag">Capital Markets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-panel" id="exp-deutsche">
+      <div class="exp-panel-inner">
+        <div class="exp-panel-meta">
+          <span class="exp-dates">Jun 2024 — Nov 2024</span>
+          <div class="exp-company-name">Deutsche Börse Group</div>
+          <div class="exp-location">Frankfurt, Germany</div>
+          <div class="divider"></div>
+          <div class="exp-meta-note">Germany's primary exchange operator — Trading & Clearing infrastructure.</div>
+        </div>
+        <div>
+          <div class="exp-role-title">Intern</div>
+          <div class="exp-role-sub">Regulatory Admissions & Governance</div>
+          <ul class="exp-bullets">
+            <li>Supported integration of new market participants by coordinating across regulatory, IT, and operations teams for compliant Trading & Clearing onboarding.</li>
+            <li>Maintained departmental efficiency at <strong>98% compliance standards</strong> by monitoring performance metrics and identifying operational inefficiencies.</li>
+            <li>Contributed to change management processes for onboarding and participant lifecycle management.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">Regulatory Governance</span><span class="exp-tag">Compliance</span>
+            <span class="exp-tag">Operations</span><span class="exp-tag">Change Management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-panel" id="exp-nexi">
+      <div class="exp-panel-inner">
+        <div class="exp-panel-meta">
+          <span class="exp-dates">Nov 2023 — May 2024</span>
+          <div class="exp-company-name">Nexi Group</div>
+          <div class="exp-location">Frankfurt, Germany</div>
+          <div class="divider"></div>
+          <div class="exp-meta-note">Europe's leading PayTech — Digital Payments Service Provider.</div>
+        </div>
+        <div>
+          <div class="exp-role-title">Working Student — Data Analyst</div>
+          <div class="exp-role-sub">Card Scheme Fees · Strategic Insights</div>
+          <ul class="exp-bullets">
+            <li>Synthesised monthly payment scheme and transaction data across global regions, delivering actionable insights on transaction cycle trends to clients.</li>
+            <li>Implemented automated data quality checks via Power Query, reducing manual data processing time by <strong>50%</strong>.</li>
+            <li>Conducted impact analyses on SAP BW data using SQL, identifying cost-saving opportunities worth <strong>€50k</strong> for the business.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">Data Analysis</span><span class="exp-tag">SQL</span>
+            <span class="exp-tag">Power Query</span><span class="exp-tag">SAP BW</span><span class="exp-tag">Payments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-panel" id="exp-deloitte">
+      <div class="exp-panel-inner">
+        <div class="exp-panel-meta">
+          <span class="exp-dates">Apr 2023 — Aug 2023</span>
+          <div class="exp-company-name">Deloitte Consulting GmbH</div>
+          <div class="exp-location">Frankfurt, Germany</div>
+          <div class="divider"></div>
+          <div class="exp-meta-note">Big 4 — Technology Strategy & Transformation, Banking practice.</div>
+        </div>
+        <div>
+          <div class="exp-role-title">Consulting Intern</div>
+          <div class="exp-role-sub">Technology Strategy & Transformation — Banking</div>
+          <ul class="exp-bullets">
+            <li>Created detailed user stories and process maps for three Digital Transformation projects, increasing team productivity by <strong>25%</strong> during agile planning phases.</li>
+            <li>Conducted market research and requirements analyses to develop digital solutions aligned with client business strategy.</li>
+            <li>Developed change management templates supporting planning, execution, and delivery of key Digital Transformation projects.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">Digital Transformation</span><span class="exp-tag">Process Mapping</span>
+            <span class="exp-tag">Banking</span><span class="exp-tag">Agile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-panel" id="exp-welspun">
+      <div class="exp-panel-inner">
+        <div class="exp-panel-meta">
+          <span class="exp-dates">Feb 2020 — Jun 2022</span>
+          <div class="exp-company-name">Welspun Global Brands Ltd</div>
+          <div class="exp-location">Mumbai, India</div>
+          <div class="divider"></div>
+          <div class="exp-meta-note">Home textile manufacturer with €2.1bn revenue — Global Sales & BD.</div>
+        </div>
+        <div>
+          <div class="exp-role-title">Key Account Manager</div>
+          <div class="exp-role-sub">Global Sales & Business Development — Retail</div>
+          <ul class="exp-bullets">
+            <li>Achieved a <strong>25% increase</strong> in product placement and <strong>15% boost</strong> in revenue across 50+ retail locations for Walmart and Sam's Club.</li>
+            <li>Managed two B2B retailer accounts with combined revenue of <strong>$100M</strong>, improving on-time delivery by 15%.</li>
+            <li>Optimised workflows using SQL and JIRA, reducing project completion time by <strong>20%</strong>.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">Account Management</span><span class="exp-tag">B2B Sales</span>
+            <span class="exp-tag">Project Management</span><span class="exp-tag">JIRA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 /* ════════════════════════════════════════
    PAGE: PROJECTS
