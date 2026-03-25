@@ -4,1016 +4,201 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Jagruti Bidkar — Consultant</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=DM+Sans&display=swap" rel="stylesheet"/>
+
 <style>
-  /* ── RESET & BASE ─────────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink:       #1a1a18;
-    --paper:     #f5f2ec;
-    --sand:      #e8e2d6;
-    --gold:      #b8924a;
-    --gold-lt:   #d4aa6a;
-    --muted:     #7a756c;
-    --white:     #ffffff;
-    --serif:     'Cormorant Garamond', Georgia, serif;
-    --sans:      'DM Sans', sans-serif;
-    --max:       1200px;
-    --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  html { scroll-behavior: smooth; font-size: 16px; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.7;
-    cursor: none;
-  }
-  /* ── SHARED UTILS ──────────────────────── */
-.container { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
-.section-banner {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
-  text-align: center; padding: 1.2rem 2rem; margin: 2.5rem 0 0;
+:root {
+  --ink:#1a1a18;
+  --paper:#f5f2ec;
+  --sand:#e8e2d6;
+  --gold:#b8924a;
+  --muted:#7a756c;
+  --serif:'Cormorant Garamond', serif;
+  --sans:'DM Sans', sans-serif;
+  --max:1100px;
 }
-.section-banner h2 {
-  font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
-  color: var(--white); letter-spacing: 0.04em;
+
+body {
+  margin:0;
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
 }
-.section-banner h2::after {
-  content: ''; display: block; width: 50px; height: 2px;
-  background: var(--gold); margin: 0.5rem auto 0;
+
+/* SECTION */
+section { padding:80px 20px; }
+.container { max-width:var(--max); margin:auto; }
+
+/* TITLE */
+.section-title {
+  font-family:var(--serif);
+  font-size:2.5rem;
+  margin-bottom:40px;
 }
-.divider { width: 48px; height: 2px; background: var(--gold); margin: 1rem 0 1.5rem; }
 
-  /* ── CUSTOM CURSOR ────────────────────────────────────────── */
-  .cursor {
-    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s;
-  }
-  .cursor.hover { width: 40px; height: 40px; background: transparent; border: 1.5px solid var(--gold); }
-
-  /* ── NAV ──────────────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    background: transparent;
-    transition: background 0.4s, backdrop-filter 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(245,242,236,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--sand);
-  }
-  .nav-logo {
-    font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
-    letter-spacing: 0.02em; color: var(--ink); text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none; position: relative;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -3px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.3s var(--ease);
-  }
-  .nav-links a:hover::after { width: 100%; }
-
-  /* ── HERO ─────────────────────────────────────────────────── */
-  #hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
-    padding: 8rem 4rem 4rem;
-    max-width: var(--max); margin: 0 auto;
-    position: relative;
-  }
-  .hero-text { padding-right: 4rem; }
-  .hero-eyebrow {
-    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.2s var(--ease) forwards;
-  }
-  .hero-name {
-    font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 5.5rem);
-    font-weight: 300; line-height: 1.05; letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.35s var(--ease) forwards;
-  }
-  .hero-name em { font-style: italic; color: var(--gold); }
-  .hero-tagline {
-    font-size: 1rem; color: var(--muted); max-width: 420px;
-    margin-bottom: 3rem; line-height: 1.8;
-    opacity: 0; animation: fadeUp 0.8s 0.5s var(--ease) forwards;
-  }
-  .hero-ctas {
-    display: flex; gap: 1.5rem; align-items: center;
-    opacity: 0; animation: fadeUp 0.8s 0.65s var(--ease) forwards;
-  }
-  .btn-primary {
-    padding: 0.85rem 2.2rem; background: var(--ink); color: var(--paper);
-    font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.1em;
-    text-transform: uppercase; text-decoration: none;
-    transition: background 0.3s, transform 0.3s;
-  }
-  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
-  .btn-ghost {
-    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink);
-    padding-bottom: 2px; transition: color 0.3s, border-color 0.3s;
-  }
-  .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
-
-  .hero-visual {
-    position: relative; display: flex; justify-content: center; align-items: center;
-    opacity: 0; animation: fadeIn 1s 0.5s var(--ease) forwards;
-  }
-  .hero-photo-frame {
-    width: 340px; height: 420px; position: relative;
-  }
-  .hero-photo-frame::before {
-    content: ''; position: absolute; top: -16px; right: -16px;
-    width: 100%; height: 100%; border: 1.5px solid var(--gold); z-index: 0;
-  }
-  .hero-photo-placeholder {
-    width: 100%; height: 100%; background: var(--sand);
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.05em;
-  }
-  .hero-photo-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
-  .hero-stats {
-    position: absolute; bottom: -2rem; left: -3rem;
-    display: flex; gap: 0; background: var(--white);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
-  }
-  .stat {
-    padding: 1.2rem 1.8rem; border-right: 1px solid var(--sand);
-    text-align: center;
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: var(--serif); font-size: 2rem; font-weight: 300;
-    color: var(--gold); display: block; line-height: 1;
-  }
-  .stat-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-
-  /* ── SECTION SHARED ───────────────────────────────────────── */
-  section { padding: 7rem 4rem; }
-  .container { max-width: var(--max); margin: 0 auto; }
-  .section-label {
-    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1rem; display: block;
-  }
-  .section-title {
-    font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.2rem);
-    font-weight: 300; line-height: 1.15; margin-bottom: 3.5rem;
-    max-width: 600px;
-  }
-  .section-title em { font-style: italic; }
-  .divider {
-    width: 48px; height: 1.5px; background: var(--gold);
-    margin: 1.5rem 0 3.5rem;
-  }
-
-  /* ── ABOUT ────────────────────────────────────────────────── */
-  #about { background: var(--white); }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
-  }
-  .about-text p {
-    font-size: 1.05rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.9;
-  }
-  .about-text p strong { color: var(--ink); font-weight: 500; }
-  .about-highlights { display: flex; flex-direction: column; gap: 1.5rem; }
-  .highlight-item {
-    display: flex; gap: 1.5rem; align-items: flex-start;
-    padding: 1.5rem; border: 1px solid var(--sand);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .highlight-item:hover { border-color: var(--gold); transform: translateX(6px); }
-  .highlight-icon {
-    width: 40px; height: 40px; flex-shrink: 0;
-    border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-family: var(--serif); font-size: 1rem;
-  }
-  .highlight-content h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.3rem; }
-  .highlight-content p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-
-  /* ── EXPERIENCE ───────────────────────────────────────────── */
-  #experience { background: var(--paper); }
-  /* Timeline header with company names and dates */
+/* TIMELINE */
 .exp-timeline-header {
-  max-width: var(--max); margin: 0 auto; padding: 2.5rem 3rem 0;
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 1.5rem; flex-wrap: wrap;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 1.5rem;
-  position: relative;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:2px solid #ccc;
+  margin-bottom:30px;
 }
 
 .exp-company-header {
-  flex: 1; min-width: 160px; text-align: center;
-  position: relative;
-  cursor: pointer;
-  transition: opacity 0.2s;
+  flex:1;
+  text-align:center;
+  cursor:pointer;
+  padding:10px;
 }
 
-.exp-company-header:hover { opacity: 0.7; }
-
-.exp-company-header.active .exp-company-name { color: var(--gold); font-weight: 600; }
-.exp-company-header.active::after {
-  content: ''; position: absolute; bottom: -1.5rem; left: 50%; right: 50%;
-  width: 100px; margin-left: -50px;
-  height: 3px; background: var(--gold);
+.exp-company-header.active {
+  color:var(--gold);
+  font-weight:bold;
 }
-
-.exp-company-name {
-  font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
-  color: var(--ink); margin-bottom: 0.35rem; line-height: 1.3;
-}
-
-.exp-company-name.logo-deutsche { color: #0066b3; }
-.exp-company-name.logo-nexi { color: #e4003a; font-weight: 700; }
-.exp-company-name.logo-deloitte { color: #1a1a18; font-weight: 700; }
-.exp-company-name.logo-deloitte em { color: #86bc25; }
-.exp-company-name.logo-lpa { color: var(--gold); }
-.exp-company-name.logo-welspun { color: #d4232c; font-weight: 700; }
 
 .exp-company-date {
-  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gold);
+  font-size:12px;
+  color:var(--gold);
 }
 
-/* Experience panels */
-.exp-panels { max-width: var(--max); margin: 0 auto; padding: 0 3rem; }
-.exp-panel { display: none; }
-.exp-panel.active { display: block; animation: pageFade 0.35s var(--ease); }
+/* PANELS */
+.exp-panel { display:none; }
+.exp-panel.active { display:block; }
 
 .exp-panel-inner {
-  display: grid; grid-template-columns: 210px 1fr;
-  gap: 2.5rem; padding: 2.5rem; background: var(--sand);
-  border: 1px solid #ddd;
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:30px;
+  background:var(--sand);
+  padding:30px;
 }
-
-.exp-panel-meta { padding-top: 0.2rem; }
-
-.exp-dates {
-  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.8rem; display: block;
-}
-
-.exp-company-info {
-  font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
-  color: var(--gold); margin-bottom: 0.3rem;
-}
-
-.exp-location { font-size: 0.76rem; color: var(--gold); margin-bottom: 1rem; }
-
-.exp-divider { 
-  width: 48px; height: 2px; background: var(--gold);
-  margin: 1rem 0 1.2rem;
-}
-
-.exp-meta-note { font-size: 0.76rem; color: var(--muted); line-height: 1.6; font-style: italic; }
 
 .exp-role-title {
-  font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
-  line-height: 1.2; margin-bottom: 0.3rem; color: var(--ink);
+  font-family:var(--serif);
+  font-size:1.5rem;
+  margin-bottom:10px;
 }
 
-.exp-role-sub { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-bottom: 1.4rem; }
-
-.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+.exp-bullets {
+  list-style:none;
+  padding:0;
+}
 
 .exp-bullets li {
-  font-size: 0.87rem; color: var(--muted); padding-left: 1.2rem;
-  position: relative; line-height: 1.8;
+  margin-bottom:10px;
 }
 
-.exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
-
-.exp-bullets li strong { color: var(--ink); font-weight: 600; }
-
-.exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
-
-.exp-tag {
-  font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 0.3rem 0.85rem; border: 1px solid var(--gold); color: var(--gold);
-  font-weight: 500;
+.exp-bullets li::before {
+  content:"— ";
+  color:var(--gold);
 }
-
-
-  /* ── SKILLS ───────────────────────────────────────────────── */
-  #skills { background: var(--ink); color: var(--paper); }
-  #skills .section-title { color: var(--paper); }
-  #skills .section-label { color: var(--gold-lt); }
-  .skills-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px;
-    background: rgba(255,255,255,0.06);
-    margin-top: 1rem;
-  }
-  .skill-card {
-    background: var(--ink); padding: 2rem 1.8rem;
-    transition: background 0.3s;
-  }
-  .skill-card:hover { background: #242420; }
-  .skill-cat {
-    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-  }
-  .skill-items { display: flex; flex-direction: column; gap: 0.8rem; }
-  .skill-row { display: flex; flex-direction: column; gap: 0.3rem; }
-  .skill-name { font-size: 0.85rem; font-weight: 400; color: var(--paper); }
-  .skill-bar {
-    height: 2px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden;
-  }
-  .skill-bar-fill {
-    position: absolute; top: 0; left: 0; height: 100%;
-    background: var(--gold); width: 0;
-    transition: width 1.2s var(--ease);
-  }
-  .skill-bar-fill.animated { width: var(--w); }
-  .skill-level { font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.3); text-transform: uppercase; }
-
-  /* ── PROJECTS ─────────────────────────────────────────────── */
-  #projects { background: var(--white); }
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
-    background: var(--sand);
-  }
-  .project-card {
-    background: var(--white); padding: 2.5rem;
-    display: flex; flex-direction: column;
-    transition: background 0.3s, transform 0.3s;
-    position: relative; overflow: hidden;
-  }
-  .project-card::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 2px; background: var(--gold);
-    transition: width 0.4s var(--ease);
-  }
-  .project-card:hover { background: #fdfaf6; transform: translateY(-4px); }
-  .project-card:hover::after { width: 100%; }
-  .project-type {
-    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.8rem;
-  }
-  .project-name {
-    font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
-    line-height: 1.25; margin-bottom: 1rem; flex: 1;
-  }
-  .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .project-tag {
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.25rem 0.7rem; border: 1px solid var(--sand); color: var(--muted);
-  }
-  .project-wip {
-    position: absolute; top: 1.2rem; right: 1.2rem;
-    font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.25rem 0.6rem; background: var(--sand); color: var(--muted);
-  }
-
-  /* ── HOBBIES ──────────────────────────────────────────────── */
-  #hobbies { background: var(--paper); }
-  .hobbies-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-  .hobbies-quote {
-    font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-weight: 300; line-height: 1.4; font-style: italic; color: var(--ink);
-  }
-  .hobbies-quote span { color: var(--gold); }
-  .hobbies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--sand); }
-  .hobby-card {
-    background: var(--paper); padding: 2rem;
-    display: flex; flex-direction: column; gap: 0.8rem;
-    transition: background 0.3s;
-  }
-  .hobby-card:hover { background: var(--white); }
-  .hobby-icon { font-size: 1.8rem; }
-  .hobby-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; }
-  .hobby-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
-
-  /* ── CONTACT ──────────────────────────────────────────────── */
-  #contact { background: var(--ink); color: var(--paper); text-align: center; }
-  #contact .section-label { color: var(--gold-lt); }
-  .contact-title {
-    font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 300; line-height: 1.1; margin-bottom: 2rem;
-  }
-  .contact-title em { font-style: italic; color: var(--gold); }
-  .contact-sub { font-size: 1rem; color: rgba(245,242,236,0.5); margin-bottom: 3.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
-  .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-  .contact-link {
-    padding: 0.9rem 2.5rem; border: 1px solid rgba(255,255,255,0.2);
-    color: var(--paper); text-decoration: none; font-size: 0.78rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    transition: border-color 0.3s, background 0.3s, color 0.3s;
-  }
-  .contact-link:hover { border-color: var(--gold); background: var(--gold); color: var(--ink); }
-  .contact-email {
-    margin-top: 3rem; font-family: var(--serif); font-size: 1.5rem;
-    font-style: italic; color: rgba(245,242,236,0.4);
-    transition: color 0.3s;
-  }
-  .contact-email:hover { color: var(--gold); }
-  .contact-email a { color: inherit; text-decoration: none; }
-
-  /* ── FOOTER ───────────────────────────────────────────────── */
-  footer {
-    background: #111110; padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-name { font-family: var(--serif); font-size: 0.9rem; color: rgba(255,255,255,0.25); }
-  .footer-langs { font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); text-transform: uppercase; }
-
-  /* ── ANIMATIONS ───────────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-
-  /* ── RESPONSIVE ───────────────────────────────────────────── */
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 2rem; }
-    #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
-    .hero-text { padding-right: 0; }
-    .hero-visual { display: none; }
-    section { padding: 5rem 2rem; }
-    .about-grid, .hobbies-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .skills-grid, .projects-grid { grid-template-columns: 1fr 1fr; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-    .nav-links { display: none; }
-  }
-  @media (max-width: 600px) {
-    .skills-grid, .projects-grid, .hobbies-grid { grid-template-columns: 1fr; }
-  }
 </style>
 </head>
+
 <body>
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-
-<!-- NAV -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo">Jagruti Bidkar</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#hobbies">More</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero" style="padding-top:8rem">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Consultant · Frankfurt, Germany</p>
-    <h1 class="hero-name">Jagruti<br/><em>Bidkar</em></h1>
-    <p class="hero-tagline">
-      Strategy & transformation consultant bridging data, operations, and digital change —
-      with experience across fintech, capital markets, and management consulting.
-    </p>
-    <div class="hero-ctas">
-      <a href="#experience" class="btn-primary">View my work</a>
-      <a href="#contact" class="btn-ghost">Let's connect</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-photo-frame">
-      <div class="hero-photo-placeholder">
-        
-        <img src="Gemini_Generated_Image_vjy31ovjy31ovjy3.png" alt="Profile photo" style="width: 100%; height: auto;">
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Years exp.</span></div>
-      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Countries</span></div>
-      <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Industries</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <span class="section-label reveal">About</span>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <h2 class="section-title">Consulting at the <em>intersection</em> of data and strategy</h2>
-        <div class="divider"></div>
-        <p>
-          I'm a Frankfurt-based consultant with a Masters in Management (Digital Business, Technology & Operations)
-          from <strong>Frankfurt School of Finance and Management</strong> and a STEM background in Textile Technology.
-        </p>
-        <p>
-          My career spans <strong>capital markets, payments, regulatory governance, and technology transformation</strong> —
-          giving me a rare end-to-end view from data pipelines to boardroom strategy.
-        </p>
-        <p>
-          Currently at <strong>Lucht Probst Associates</strong>, I deliver OTC & Structured Products projects for six clients,
-          consistently reducing delivery times and improving retention metrics through rigorous analysis and clear communication.
-        </p>
-      </div>
-      <div class="about-highlights reveal reveal-delay-1">
-        <div class="highlight-item">
-          <div class="highlight-icon">I</div>
-          <div class="highlight-content">
-            <h4>Industry Focus</h4>
-            <p>Capital markets, fintech, payments, and digital transformation in financial services.</p>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">A</div>
-          <div class="highlight-content">
-            <h4>Analytical Edge</h4>
-            <p>SQL, Python, PowerBI, and SAP — fluent in translating raw data into executive insights.</p>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">L</div>
-          <div class="highlight-content">
-            <h4>Languages</h4>
-            <p>English & Hindi (bilingual), Marathi (native), German (B2) — effective across global teams.</p>
-          </div>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-icon">E</div>
-          <div class="highlight-content">
-            <h4>Education</h4>
-            <p>Frankfurt School of Finance & Management — Masters in Management, Digital Business &amp; Technology.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
 <section id="experience">
-  <div class="container">
-    <span class="section-label reveal">Experience</span>
-    <h2 class="section-title reveal">A track record of <em>measurable</em> impact</h2>
-      <div class="exp-timeline-header">
-    <div class="exp-company-header active" onclick="showExp('lpa',this)">
-      <div class="exp-company-name logo-lpa">Lucht Probst<br/>Associates</div>
-      <div class="exp-company-date">Jan 2025 – Present</div>
-    </div>
-    <div class="exp-company-header" onclick="showExp('deutsche',this)">
-      <div class="exp-company-name logo-deutsche">Deutsche<br/>Börse Group</div>
-      <div class="exp-company-date">Jun – Nov 2024</div>
-    </div>
-    <div class="exp-company-header" onclick="showExp('nexi',this)">
-      <div class="exp-company-name logo-nexi">nexi</div>
-      <div class="exp-company-date">Nov 2023 – May 2024</div>
-    </div>
-    <div class="exp-company-header" onclick="showExp('deloitte',this)">
-      <div class="exp-company-name logo-deloitte">Deloitte<em>.</em></div>
-      <div class="exp-company-date">Apr – Aug 2023</div>
-    </div>
-    <div class="exp-company-header" onclick="showExp('welspun',this)">
-      <div class="exp-company-name logo-welspun">Welspun</div>
-      <div class="exp-company-date">Feb 2020 – Jun 2022</div>
-    </div>
+<div class="container">
+
+<h2 class="section-title">Experience</h2>
+
+<!-- Timeline -->
+<div class="exp-timeline-header">
+  <div class="exp-company-header active" onclick="showPanel(0)">
+    LPA<br><span class="exp-company-date">2025 - Present</span>
   </div>
-  <div class="exp-panels">
 
-    <div class="exp-panel active" id="exp-lpa">
-      <div class="exp-panel-inner">
-        <div class="exp-panel-meta">
-          <span class="exp-dates">Jan 2025 — Present</span>
-          <div class="exp-company-info">Lucht Probst Associates GmbH</div>
-          <div class="exp-location">Frankfurt, Germany</div>
-          <div class="exp-divider"></div>
-          <div class="exp-meta-note">Capital markets consultancy specialising in OTC & Structured Products.</div>
-        </div>
-        <div>
-          <div class="exp-role-title">Jr. Consultant</div>
-          <div class="exp-role-sub">Client Delivery — OTC & Structured Products</div>
-          <ul class="exp-bullets">
-            <li>Orchestrated communication between cross-functional teams and six clients, achieving a <strong>30% reduction</strong> in project delivery times.</li>
-            <li>Led client feedback and testing cycles during platform upgrades, contributing to a <strong>20% increase</strong> in client retention metrics.</li>
-            <li>Aligned technical implementation with client goals across multiple concurrent delivery streams.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="exp-tag">OTC DERIVATIVES</span>
-            <span class="exp-tag">CLIENT DELIVERY</span>
-            <span class="exp-tag">STAKEHOLDER MGMT</span>
-            <span class="exp-tag">CAPITAL MARKETS</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="exp-company-header" onclick="showPanel(1)">
+    Nexi<br><span class="exp-company-date">2023 - 2024</span>
+  </div>
 
-    <div class="exp-panel" id="exp-deutsche">
-      <div class="exp-panel-inner">
-        <div class="exp-panel-meta">
-          <span class="exp-dates">Jun 2024 — Nov 2024</span>
-          <div class="exp-company-info">Deutsche Börse Group</div>
-          <div class="exp-location">Frankfurt, Germany</div>
-          <div class="exp-divider"></div>
-          <div class="exp-meta-note">Germany's primary exchange operator — Trading & Clearing.</div>
-        </div>
-        <div>
-          <div class="exp-role-title">Intern</div>
-          <div class="exp-role-sub">Regulatory Admissions & Governance</div>
-          <ul class="exp-bullets">
-            <li>Supported integration of new market participants coordinating regulatory, IT, and operations teams for Trading & Clearing onboarding.</li>
-            <li>Maintained <strong>98% compliance standards</strong> by monitoring process metrics and identifying inefficiencies.</li>
-            <li>Contributed to change management processes for participant lifecycle management.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="exp-tag">REGULATORY GOVERNANCE</span>
-            <span class="exp-tag">COMPLIANCE</span>
-            <span class="exp-tag">OPERATIONS</span>
-            <span class="exp-tag">CHANGE MANAGEMENT</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="exp-panel" id="exp-nexi">
-      <div class="exp-panel-inner">
-        <div class="exp-panel-meta">
-          <span class="exp-dates">Nov 2023 — May 2024</span>
-          <div class="exp-company-info">Nexi Group</div>
-          <div class="exp-location">Frankfurt, Germany</div>
-          <div class="exp-divider"></div>
-          <div class="exp-meta-note">Europe's leading PayTech — Digital Payments Service Provider.</div>
-        </div>
-        <div>
-          <div class="exp-role-title">Working Student — Data Analyst</div>
-          <div class="exp-role-sub">Card Scheme Fees · Strategic Insights</div>
-          <ul class="exp-bullets">
-            <li>Synthesised monthly payment scheme and transaction data across global regions, delivering actionable insights on transaction cycle trends.</li>
-            <li>Implemented automated data quality checks via Power Query, reducing manual data processing time by <strong>50%</strong>.</li>
-            <li>Conducted impact analyses on SAP BW data using SQL, identifying cost-saving opportunities worth <strong>€50k</strong>.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="exp-tag">DATA ANALYSIS</span>
-            <span class="exp-tag">SQL</span>
-            <span class="exp-tag">POWER QUERY</span>
-            <span class="exp-tag">SAP BW</span>
-            <span class="exp-tag">PAYMENTS</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="exp-panel" id="exp-deloitte">
-      <div class="exp-panel-inner">
-        <div class="exp-panel-meta">
-          <span class="exp-dates">Apr 2023 — Aug 2023</span>
-          <div class="exp-company-info">Deloitte Consulting GmbH</div>
-          <div class="exp-location">Frankfurt, Germany</div>
-          <div class="exp-divider"></div>
-          <div class="exp-meta-note">Big 4 — Technology Strategy & Transformation, Banking.</div>
-        </div>
-        <div>
-          <div class="exp-role-title">Consulting Intern</div>
-          <div class="exp-role-sub">Technology Strategy & Transformation — Banking</div>
-          <ul class="exp-bullets">
-            <li>Created detailed user stories and process maps for three Digital Transformation projects, increasing team productivity by <strong>25%</strong>.</li>
-            <li>Conducted market research and requirements analyses to develop digital solutions aligned with client strategy.</li>
-            <li>Developed change management templates supporting planning and execution of key Digital Transformation initiatives.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="exp-tag">DIGITAL TRANSFORMATION</span>
-            <span class="exp-tag">PROCESS MAPPING</span>
-            <span class="exp-tag">BANKING</span>
-            <span class="exp-tag">AGILE</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="exp-panel" id="exp-welspun">
-      <div class="exp-panel-inner">
-        <div class="exp-panel-meta">
-          <span class="exp-dates">Feb 2020 — Jun 2022</span>
-          <div class="exp-company-info">Welspun Global Brands Ltd</div>
-          <div class="exp-location">Mumbai, India</div>
-          <div class="exp-divider"></div>
-          <div class="exp-meta-note">Home textile manufacturer — Global Sales & Business Development.</div>
-        </div>
-        <div>
-          <div class="exp-role-title">Key Account Manager</div>
-          <div class="exp-role-sub">Global Sales & Business Development — Retail</div>
-          <ul class="exp-bullets">
-            <li>Achieved a <strong>25% increase</strong> in product placement and <strong>15% boost</strong> in revenue across 50+ retail locations for Walmart and Sam's Club.</li>
-            <li>Managed two B2B retailer accounts with combined revenue of <strong>$100M</strong>, improving on-time delivery by 15%.</li>
-            <li>Optimised workflows using SQL and JIRA, reducing project completion time by <strong>20%</strong>.</li>
-          </ul>
-          <div class="exp-tags">
-            <span class="exp-tag">ACCOUNT MANAGEMENT</span>
-            <span class="exp-tag">B2B SALES</span>
-            <span class="exp-tag">PROJECT MANAGEMENT</span>
-            <span class="exp-tag">JIRA</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div class="exp-company-header" onclick="showPanel(2)">
+    Welspun<br><span class="exp-company-date">2020 - 2022</span>
   </div>
 </div>
 
+<!-- Panels -->
+<div class="exp-panels">
+
+<!-- LPA -->
+<div class="exp-panel active">
+  <div class="exp-panel-inner">
+    <div>
+      <strong>2025 – Present</strong><br>
+      Lucht Probst Associates
+    </div>
+
+    <div>
+      <div class="exp-role-title">Junior Consultant</div>
+
+      <ul class="exp-bullets">
+        <li><strong>Led delivery coordination</strong> across 6 client accounts</li>
+        <li><strong>Reduced escalations by 15%</strong> through better documentation</li>
+        <li>Managed backlog, timelines, and stakeholder alignment</li>
+        <li>Bridged technical teams and clients on OTC implementations</li>
+      </ul>
     </div>
   </div>
-</section>
+</div>
+
+<!-- Nexi -->
+<div class="exp-panel">
+  <div class="exp-panel-inner">
+    <div>
+      <strong>2023 – 2024</strong><br>
+      Nexi Group
+    </div>
+
+    <div>
+      <div class="exp-role-title">Data Analyst</div>
+
+      <ul class="exp-bullets">
+        <li>Analysed payment datasets across European markets</li>
+        <li><strong>Reduced reporting time by 50%</strong> via automation</li>
+        <li><strong>Identified €50k+ savings</strong> using SQL</li>
+        <li>Delivered insights for pricing and operations</li>
+      </ul>
     </div>
   </div>
-</section>
+</div>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <span class="section-label reveal">Skills</span>
-    <h2 class="section-title reveal">Tools I use to <em>get things done</em></h2>
-    <div class="skills-grid reveal">
-      <div class="skill-card">
-        <div class="skill-cat">Business Intelligence</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">SQL</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Python</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:85%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">PowerBI</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:88%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Power Query</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Data & ERP</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">SAP BW/4HANA</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:65%"></div></div>
-            <span class="skill-level">Intermediate</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">JavaScript</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:75%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Microsoft Excel</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:98%"></div></div>
-            <span class="skill-level">Expert</span>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Project & CRM</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">JIRA</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Salesforce</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:88%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Agile / Scrum</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:85%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-cat">Consulting</div>
-        <div class="skill-items">
-          <div class="skill-row">
-            <span class="skill-name">Process Mapping</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:92%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Stakeholder Mgmt.</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:90%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-name">Market Research</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="--w:87%"></div></div>
-            <span class="skill-level">Advanced</span>
-          </div>
-        </div>
-      </div>
+<!-- Welspun -->
+<div class="exp-panel">
+  <div class="exp-panel-inner">
+    <div>
+      <strong>2020 – 2022</strong><br>
+      Welspun
+    </div>
+
+    <div>
+      <div class="exp-role-title">Key Account Manager</div>
+
+      <ul class="exp-bullets">
+        <li><strong>Drove 15% revenue growth</strong> across retail locations</li>
+        <li>Managed <strong>$100M+ accounts</strong></li>
+        <li>Improved delivery timelines and operations</li>
+      </ul>
     </div>
   </div>
+</div>
+
+</div>
+</div>
 </section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <span class="section-label reveal">Projects</span>
-    <h2 class="section-title reveal">Building things that <em>matter</em></h2>
-    <div class="projects-grid reveal">
-
-      <div class="project-card">
-        <span class="project-wip">Live</span>
-        <div class="project-type">Consulting · Data</div>
-        <h3 class="project-name">German Fintech Market Dashboard</h3>
-        <p class="project-desc">Interactive PowerBI-style web dashboard visualizing German fintech market trends — built to demonstrate consulting-grade data storytelling using public datasets.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">SQL</span>
-          <span class="project-tag">HTML/CSS</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-wip">In Progress</span>
-        <div class="project-type">Automation · Finance</div>
-        <h3 class="project-name">Payment Fee Report Automator</h3>
-        <p class="project-desc">Inspired by Nexi work — a tool that ingests CSV transaction data and auto-generates a clean visual HTML report, reducing manual reporting from hours to seconds.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Pandas</span>
-          <span class="project-tag">Jinja2</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-wip">In Progress</span>
-        <div class="project-type">Product · Web App</div>
-        <h3 class="project-name">Compliance Tracker MVP</h3>
-        <p class="project-desc">A lightweight web app for regulatory onboarding checklists, inspired by Deutsche Boerse governance work. Targets SMEs navigating EU compliance requirements.</p>
-        <div class="project-tags">
-          <span class="project-tag">React</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Airtable</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Case Study · Strategy</div>
-        <h3 class="project-name">OTC Derivatives Explainer Site</h3>
-        <p class="project-desc">An educational microsite explaining OTC and structured products for non-specialist audiences — demonstrating both subject matter expertise and web communication skills.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">Content Strategy</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Research · Consulting</div>
-        <h3 class="project-name">Digital Transformation in Banking</h3>
-        <p class="project-desc">A research deep-dive based on Deloitte project experience — analyzing transformation patterns, common failure modes, and best practices across European banks.</p>
-        <div class="project-tags">
-          <span class="project-tag">Research</span>
-          <span class="project-tag">Strategy</span>
-          <span class="project-tag">Write-up</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Personal · Portfolio</div>
-        <h3 class="project-name">This Portfolio Site</h3>
-        <p class="project-desc">Designed in Figma and built from scratch in HTML/CSS/JS — a live demonstration of learning web development as a consulting professional.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Figma</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- HOBBIES -->
-<section id="hobbies">
-  <div class="container">
-    <span class="section-label reveal">Get to Know Me</span>
-    <div class="hobbies-layout">
-      <div class="reveal">
-        <h2 class="section-title">Beyond the <em>spreadsheets</em></h2>
-        <div class="divider"></div>
-        <p class="hobbies-quote">
-          "I believe the best consultants are<br/>
-          <span>curious people first</span> —<br/>
-          and professionals second."
-        </p>
-      </div>
-      <div class="hobbies-grid reveal reveal-delay-1">
-        <div class="hobby-card">
-          <div class="hobby-icon">✈️</div>
-          <div class="hobby-name">Travelling</div>
-          <div class="hobby-desc">Exploring cultures across Europe and Asia — every trip sharpens cross-cultural communication.</div>
-        </div>
-        <div class="hobby-card">
-          <div class="hobby-icon">📚</div>
-          <div class="hobby-name">Reading</div>
-          <div class="hobby-desc">Strategy, biographies, and the occasional thriller. Always have a book on the go.</div>
-        </div>
-        <div class="hobby-card">
-          <div class="hobby-icon">🎨</div>
-          <div class="hobby-name">Sketching & Painting</div>
-          <div class="hobby-desc">Visual thinking that feeds directly into how I approach slide design and data storytelling.</div>
-        </div>
-        <div class="hobby-card">
-          <div class="hobby-icon">⚽</div>
-          <div class="hobby-name">Sports</div>
-          <div class="hobby-desc">Team sports instilled the discipline and collaborative mindset I bring to every project.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <span class="section-label">Contact</span>
-    <h2 class="contact-title">Let's work<br/><em>together</em></h2>
-    <p class="contact-sub">Open to consulting opportunities, MBB applications, and select freelance projects across data, strategy, and digital transformation.</p>
-    <div class="contact-links">
-      <a href="mailto:jbidkar@gmail.com" class="contact-link">Email me</a>
-      <a href="https://linkedin.com" target="_blank" class="contact-link">LinkedIn</a>
-      <a href="#" class="contact-link">Download CV</a>
-    </div>
-    <div class="contact-email"><a href="mailto:jbidkar@gmail.com">jbidkar@gmail.com</a></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span class="footer-name">Jagruti Bidkar © 2025</span>
-  <span class="footer-langs">DE · EN · HI · MR</span>
-</footer>
 
 <script>
-// ── Cursor ──
-const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top  = e.clientY + 'px';
-});
-document.querySelectorAll('a, button, .exp-item, .project-card, .skill-card, .hobby-card').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-});
+function showPanel(index) {
+  const headers = document.querySelectorAll('.exp-company-header');
+  const panels = document.querySelectorAll('.exp-panel');
 
-// ── Nav scroll ──
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
+  headers.forEach(h => h.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
 
-// ── Scroll reveal ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ── Skill bar animation ──
-const barObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => bar.classList.add('animated'));
-    }
-  });
-}, { threshold: 0.3 });
-document.querySelectorAll('.skills-grid').forEach(el => barObserver.observe(el));
+  headers[index].classList.add('active');
+  panels[index].classList.add('active');
+}
 </script>
+
 </body>
 </html>
