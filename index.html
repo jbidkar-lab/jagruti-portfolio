@@ -304,6 +304,22 @@
     font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
     padding: 0.25rem 0.6rem; background: var(--sand); color: var(--muted);
   }
+    .project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .project-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
 
   /* ── HOBBIES ──────────────────────────────────────────────── */
   #hobbies { background: var(--paper); }
@@ -656,7 +672,7 @@
         <div class="skill-cat">Consulting</div>
         <div class="skill-items">
           <div class="skill-row">
-            <span class="skill-name">Process Mapping</span>
+            <span class="skill-name">Process Mapping (BPMN)</span>
             <div class="skill-bar"><div class="skill-bar-fill" style="--w:92%"></div></div>
             <span class="skill-level">Advanced</span>
           </div>
@@ -666,7 +682,7 @@
             <span class="skill-level">Advanced</span>
           </div>
           <div class="skill-row">
-            <span class="skill-name">Market Research</span>
+            <span class="skill-name">Requirements elicitation & documentation (BRD/FSD, user stories, acceptance criteria)</span>
             <div class="skill-bar"><div class="skill-bar-fill" style="--w:87%"></div></div>
             <span class="skill-level">Advanced</span>
           </div>
@@ -693,6 +709,7 @@
           <span class="project-tag">VS Code</span>
           <span class="project-tag">HTML/CSS</span>
         </div>
+        <a href="https://daysync-topm.vercel.app/" target="_blank" class="project-link">View Project →</a>
       </div>
 
       <div class="project-card">
@@ -715,17 +732,6 @@
           <span class="project-tag">Research</span>
           <span class="project-tag">Strategy</span>
           <span class="project-tag">Write-up</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type">Personal · Portfolio</div>
-        <h3 class="project-name">This Portfolio Site</h3>
-        <p class="project-desc">Designed in Figma and built from scratch in HTML/CSS/JS — a live demonstration of learning web development as a consulting professional.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML/CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Figma</span>
         </div>
       </div>
 
